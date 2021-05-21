@@ -1,25 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import {darkTheme} from './theme/themes';
+import {ThemeProvider} from "styled-components";
+import {useMousePosition} from "./hooks/useMousePosition";
+import Line from "./components/drawElements/line";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    return (
+      <ThemeProvider theme={darkTheme}>
+          <Line/>
+      </ThemeProvider>
+    );
 }
 
 export default App;
