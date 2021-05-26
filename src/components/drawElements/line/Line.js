@@ -26,7 +26,16 @@ const Line = () => {
             if (pointsValue.current >= 2) return window.removeEventListener("click", setFromEvent);
             return returnFunction()
         }
+        const stopDrawing = (e) => {
+            const clean = () => {
+                window.removeEventListener("click", setFromEvent);
+                window.removeEventListener("keydown", stopDrawing);
+                if (pointsValue.current > 0) document.getElementById(`${pointsValue.current + firstPointPosition}`).remove();
+            }
+            if (e.code === 'Escape') return clean();
+        }
         window.addEventListener("click", setFromEvent);
+        window.addEventListener("keydown", stopDrawing);
 
         return () => {
             window.removeEventListener("click", setFromEvent);
@@ -37,6 +46,7 @@ const Line = () => {
         pointsValue.current > 0
             ?
                 <LineSVG
+                    id={pointsValue.current + firstPointPosition}
                     firstPointX = {selectedPoints === 0 ? cursorPosition.x : firstPointPosition.x}
                     firstPointY = {selectedPoints === 0 ? cursorPosition.y : firstPointPosition.y}
                     secondPointX = {selectedPoints === 1 ? cursorPosition.x : secondPointPosition.x}

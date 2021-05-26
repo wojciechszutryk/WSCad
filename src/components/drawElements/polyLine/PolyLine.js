@@ -13,7 +13,12 @@ const PolyLine = () => {
             return setPointsPosition([...pointsValue.current])
         }
         const stopDrawing = (e) => {
-            window.removeEventListener("click", setFromEvent);
+            const clean = () => {
+                window.removeEventListener("click", setFromEvent);
+                window.removeEventListener("keydown", stopDrawing);
+                document.getElementById(`${pointsValue.current.length - 1}`).remove();
+            }
+            if (e.code === 'Escape') return clean();
         }
         window.addEventListener("click", setFromEvent);
         window.addEventListener("keydown", stopDrawing);
@@ -25,12 +30,11 @@ const PolyLine = () => {
     }, []);
 
     const linesToDraw = pointsPosition.map((point, index) => {
-        console.log(point)
         if (pointsPosition.length === 1 || index === pointsPosition.length-1){
-            console.log('returning line drawing')
             return(
                 <LineSVG
                     key={index}
+                    id={index}
                     firstPointX = {point.x}
                     firstPointY = {point.y}
                     secondPointX = {cursorPosition.x}
@@ -48,10 +52,9 @@ const PolyLine = () => {
             />
         )
     })
-    // console.log(linesToDraw)
 
     return (
-        pointsValue.current.length > 2
+        pointsValue.current.length > 0
             ?
                 linesToDraw
             :

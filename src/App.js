@@ -1,16 +1,21 @@
 import './App.css';
 import {darkTheme} from './theme/themes';
 import {ThemeProvider} from "styled-components";
-import {useMousePosition} from "./hooks/useMousePosition";
-import Line from "./components/drawElements/line";
+
 import PolyLine from "./components/drawElements/polyLine";
+import Line from "./components/drawElements/line";
+
+import { Provider } from 'react-redux'
+import store from './store'
 
 const App = () => {
     return (
-      <ThemeProvider theme={darkTheme}>
-          <PolyLine/>
-          {/*<Line/>*/}
-      </ThemeProvider>
+        <Provider store={store}>
+          <ThemeProvider theme={darkTheme}>
+              WSCad, draw line or polyline
+              <PolyLine/>
+          </ThemeProvider>
+        </Provider>
     );
 }
 

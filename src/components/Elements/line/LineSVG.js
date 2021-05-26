@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react';
 
-const LineSVG = ({color= 'red',
+const LineSVG = ({id,
+                color= 'red',
                 linePattern = null,
                 lineWidth = 1,
                 firstPointX = 0,
@@ -17,7 +18,11 @@ const LineSVG = ({color= 'red',
     }), [color, lineWidth, linePattern]);
 
     return (
-        <svg height={canvasHeight} width={canvasWidth} style={{position: 'fixed'}}>
+        <svg
+            id={id ? id : undefined}
+            height={canvasHeight}
+            width={canvasWidth}
+            style={{position: 'fixed'}}>
             <line
                 x1={firstPointX}
                 y1={firstPointY}
