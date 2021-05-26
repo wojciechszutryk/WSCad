@@ -1,11 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useMousePosition} from "../../../hooks/useMousePosition";
+import LineSVG from "../../Elements/line";
 
-const Line = ({color= 'red',
-                linePattern = null,
-                lineWidth = 1,
-                canvasHeight = window.innerHeight,
-                canvasWidth = window.innerWidth,}) => {
+const Line = () => {
 
     const cursorPosition = useMousePosition();
     const pointsValue = useRef(0);
@@ -36,25 +33,15 @@ const Line = ({color= 'red',
         };
     }, []);
 
-    const lineStyle = {
-        stroke: color,
-        strokeWidth: lineWidth,
-        strokeDasharray: linePattern
-    };
-
-
     return (
         pointsValue.current > 0
             ?
-                <svg height={canvasHeight} width={canvasWidth}>
-                    <line
-                        x1={selectedPoints === 0 ? cursorPosition.x : firstPointPosition.x}
-                        y1={selectedPoints === 0 ? cursorPosition.y : firstPointPosition.y}
-                        x2={selectedPoints === 1 ? cursorPosition.x : secondPointPosition.x}
-                        y2={selectedPoints === 1 ? cursorPosition.y : secondPointPosition.y}
-                        style={lineStyle}
-                    />
-                </svg>
+                <LineSVG
+                    firstPointX = {selectedPoints === 0 ? cursorPosition.x : firstPointPosition.x}
+                    firstPointY = {selectedPoints === 0 ? cursorPosition.y : firstPointPosition.y}
+                    secondPointX = {selectedPoints === 1 ? cursorPosition.x : secondPointPosition.x}
+                    secondPointY = {selectedPoints === 1 ? cursorPosition.y : secondPointPosition.y}
+                />
             :
                 null
     );
