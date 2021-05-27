@@ -1,7 +1,7 @@
 import {THEME_TOGGLE} from "../constants";
 
 const startState = {
-    darkTheme: true,
+    darkTheme: false,
 }
 
 const application = (state= startState, action) => {
