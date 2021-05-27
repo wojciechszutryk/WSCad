@@ -1,24 +1,19 @@
 import {
+    LINE_ADD,
+    POLYLINE_ADD
 
 } from '../../constants';
 
-export const addLine = id => {
+export const addLine = line => {
     return{
-        type: BUDGET_ACTIVE_CATEGORIES_ADD,
-        payload: id
+        type: LINE_ADD,
+        payload: line
     }
 };
 
-export const addPolyLine = id => {
+export const addPolyLine = polyLine => {
     return{
-        type: BUDGET_ACTIVE_CATEGORIES_ADD,
-        payload: id
-    }
-};
-
-export const removeActiveCategory = id => {
-    return{
-        type: BUDGET_ACTIVE_CATEGORIES_REMOVE,
-        payload: id
+        type: POLYLINE_ADD,
+        payload: polyLine
     }
 };

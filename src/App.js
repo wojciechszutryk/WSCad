@@ -6,11 +6,11 @@ import PolyLine from "./components/drawElements/polyLine";
 import Line from "./components/drawElements/line";
 
 import { Provider } from 'react-redux'
-import store from './store'
+import store from './data/store'
 
 const App = () => {
     return (
-        <Provider store={store}>
+        <Provider store={store()}>
           <ThemeProvider theme={darkTheme}>
               WSCad, draw line or polyline
               <PolyLine/>

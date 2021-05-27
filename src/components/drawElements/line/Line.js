@@ -1,60 +1,77 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useMousePosition} from "../../../hooks/useMousePosition";
 import LineSVG from "../../Elements/line";
+import {addLine} from "../../../data/actions/drawingActions/drawingActions";
+import {connect} from "react-redux";
 
-const Line = () => {
-
+const Line = ({lines, addLine}) => {
     const cursorPosition = useMousePosition();
-    const pointsValue = useRef(0);
-    const [selectedPoints, setSelectedPoints] = useState(pointsValue.current);
-    const [firstPointPosition, setFirstPointPosition] = useState({ x: null, y: null });
-    const [secondPointPosition, setSecondPointPosition] = useState({ x: null, y: null });
+    const pointsValue = useRef([]);
+    const [pointsPosition, setPointsPosition] = useState([]);
 
     useEffect(() => {
         const setFromEvent = (e) => {
-            const returnFunction = (pointsValue.current === 0)
-                ? () => {
-                    pointsValue.current += 1;
-                    setSelectedPoints(pointsValue.current)
-                    setFirstPointPosition({ x: e.clientX, y: e.clientY })
-                }
-                : () => {
-                    pointsValue.current += 1;
-                    setSelectedPoints(pointsValue.current)
-                    setSecondPointPosition({ x: e.clientX, y: e.clientY })
-                }
-            if (pointsValue.current >= 2) return window.removeEventListener("click", setFromEvent);
-            return returnFunction()
+            pointsValue.current.push({x: e.clientX, y: e.clientY});
+            const escapeFunction = () => {
+                setPointsPosition([...pointsValue.current])
+                stopDrawing()
+            }
+            if (pointsValue.current.length === 2) return escapeFunction();
+            return setPointsPosition([...pointsValue.current])
         }
         const stopDrawing = (e) => {
             const clean = () => {
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
-                if (pointsValue.current > 0) document.getElementById(`${pointsValue.current + firstPointPosition}`).remove();
+                document.getElementById('line'+(lines.length)).remove();
             }
-            if (e.code === 'Escape') return clean();
+            const finish = () => {
+                window.removeEventListener("click", setFromEvent);
+                window.removeEventListener("keydown", stopDrawing);
+                const line = {}
+                line[lines.length] = pointsValue.current;
+                addLine(line);
+            }
+            if (e && e.code === 'Escape') return clean();
+            return finish();
         }
         window.addEventListener("click", setFromEvent);
         window.addEventListener("keydown", stopDrawing);
 
         return () => {
             window.removeEventListener("click", setFromEvent);
+            window.removeEventListener("keydown", stopDrawing);
         };
-    }, []);
+    }, [addLine]);
+
+    let lineToDraw = null;
+    if (pointsPosition.length === 2) lineToDraw = (
+        <LineSVG
+            id={'line'+(lines.length)}
+            firstPointX = {pointsPosition[0].x}
+            firstPointY = {pointsPosition[0].y}
+            secondPointX = {pointsPosition[1].x}
+            secondPointY = {pointsPosition[1].y}
+        />)
+    else if (pointsPosition.length === 1) lineToDraw = (
+        <LineSVG
+            id={'line'+(lines.length)}
+            firstPointX = {pointsPosition[0].x}
+            firstPointY = {pointsPosition[0].y}
+            secondPointX = {cursorPosition.x}
+            secondPointY = {cursorPosition.y}
+        />)
 
     return (
-        pointsValue.current > 0
-            ?
-                <LineSVG
-                    id={pointsValue.current + firstPointPosition}
-                    firstPointX = {selectedPoints === 0 ? cursorPosition.x : firstPointPosition.x}
-                    firstPointY = {selectedPoints === 0 ? cursorPosition.y : firstPointPosition.y}
-                    secondPointX = {selectedPoints === 1 ? cursorPosition.x : secondPointPosition.x}
-                    secondPointY = {selectedPoints === 1 ? cursorPosition.y : secondPointPosition.y}
-                />
-            :
-                null
-    );
+        lineToDraw
+    )
 };
 
-export default Line;
+const ConnectedLine = connect(state => ({
+        lines: state.elements.lines,}),
+    {
+        addLine,
+    }
+)(Line);
+
+export default ConnectedLine;

@@ -1,8 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useMousePosition} from "../../../hooks/useMousePosition";
 import LineSVG from "../../Elements/line";
+import {connect} from "react-redux";
+import {addPolyLine} from "../../../data/actions/drawingActions/drawingActions";
 
-const PolyLine = () => {
+const PolyLine = ({addPolyLine}) => {
     const cursorPosition = useMousePosition();
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
@@ -17,6 +19,7 @@ const PolyLine = () => {
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
                 document.getElementById(`${pointsValue.current.length - 1}`).remove();
+                addPolyLine(pointsValue.current);
             }
             if (e.code === 'Escape') return clean();
         }
@@ -27,7 +30,7 @@ const PolyLine = () => {
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", stopDrawing);
         };
-    }, []);
+    }, [addPolyLine]);
 
     const linesToDraw = pointsPosition.map((point, index) => {
         if (pointsPosition.length === 1 || index === pointsPosition.length-1){
@@ -62,4 +65,10 @@ const PolyLine = () => {
     );
 };
 
-export default PolyLine;
+const ConnectedPolyLine = connect(null,
+    {
+        addPolyLine,
+    }
+)(PolyLine);
+
+export default ConnectedPolyLine;
