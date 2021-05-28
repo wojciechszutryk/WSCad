@@ -32,8 +32,6 @@ export const NavigationWrapper = styled.section`
     }
 
     &:hover{
-      //top: calc(100% - 35px) !important;
-      //left: calc(100% - 75px) !important;
       transform: translate(-5px,-5px);
       background-color: ${({theme}) => theme.background.darkHover};
       width: 60px;
@@ -88,9 +86,10 @@ export const Dragger = styled.div`
 export const Minimizer = styled.button`
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   height: 20px;
   width: 20px;
+  z-index: 1;
   cursor: pointer;
   background-color: ${({theme}) => theme.border.normal};
   color: ${({theme}) => theme.icon.normal};
@@ -110,4 +109,9 @@ export const Minimizer = styled.button`
       display: block;
     }
   }
+`;
+
+export const AppButtonsWrapper = styled.div`
+  display: flex;
+  padding: 8px 5px;
 `;

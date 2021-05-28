@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Dragger, Minimizer, NavigationWrapper} from "./NavigationStyles";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDraftingCompass, faCompress } from '@fortawesome/free-solid-svg-icons'
+import {faDraftingCompass, faCompress, faCog} from '@fortawesome/free-solid-svg-icons'
+import AppSettings from "./AppSettings";
 
 function dragElement(elem) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -72,10 +73,11 @@ const Navigation = () => {
             <NavigationWrapper id={"navigation2"}>
                 <Minimizer onClick={() => toggleMinimized("navigation2")}>
                     {minimized[1] ?
-                        <FontAwesomeIcon icon={faDraftingCompass} />:
+                        <FontAwesomeIcon icon={faCog} />:
                         <FontAwesomeIcon icon={faCompress} />}
                 </Minimizer>
                 <Dragger id="navigation2Dragger"/>
+                <AppSettings resetMinimized={setMinimized}/>
             </NavigationWrapper>
         </nav>
     );
