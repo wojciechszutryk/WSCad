@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
-import {NavigationWrapper} from "../../wrappers/NavigationWrapper";
-import {Dragger} from "./NavigationStyles";
+import React, {useEffect, useState} from 'react';
+import {Dragger, Minimizer, NavigationWrapper} from "./NavigationStyles";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDraftingCompass, faCompress } from '@fortawesome/free-solid-svg-icons'
 
 function dragElement(elem) {
-    console.log(elem)
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if (document.getElementById(elem.id + "Dragger")) document.getElementById(elem.id + "Dragger").onmousedown = dragMouseDown;
     else elem.onmousedown = dragMouseDown;
@@ -41,16 +41,43 @@ function dragElement(elem) {
 }
 
 const Navigation = () => {
+    const [minimized, setMinimized] = useState([false, false]);
+
     useEffect(() => {
-        dragElement(document.getElementById("navigation"));
+        dragElement(document.getElementById("navigation1"));
+        dragElement(document.getElementById("navigation2"));
     },[])
+
+    const toggleMinimized = (name) => {
+        const menu = document.getElementById(name);
+        menu.style.transition = '.5s';
+        const stateCopy = [...minimized];
+        const index = parseInt(name.slice(-1)) - 1;
+        stateCopy[index] = !minimized[index];
+        setMinimized(stateCopy);
+        menu.classList.toggle('minimized');
+        setTimeout(function(){ menu.style.transition = '0s'; }, 500);
+    }
+
     return (
-        <NavigationWrapper id={"navigation"}>
-            <Dragger id="navigationheader"/>
-            <p>Move</p>
-            <p>this</p>
-            <p>DIV</p>
-        </NavigationWrapper>
+        <nav>
+            <NavigationWrapper id={"navigation1"}>
+                <Minimizer onClick={() => toggleMinimized("navigation1")}>
+                    {minimized[0] ?
+                        <FontAwesomeIcon icon={faDraftingCompass} />:
+                        <FontAwesomeIcon icon={faCompress} />}
+                </Minimizer>
+                <Dragger id="navigation1Dragger"/>
+            </NavigationWrapper>
+            <NavigationWrapper id={"navigation2"}>
+                <Minimizer onClick={() => toggleMinimized("navigation2")}>
+                    {minimized[1] ?
+                        <FontAwesomeIcon icon={faDraftingCompass} />:
+                        <FontAwesomeIcon icon={faCompress} />}
+                </Minimizer>
+                <Dragger id="navigation2Dragger"/>
+            </NavigationWrapper>
+        </nav>
     );
 };
 
