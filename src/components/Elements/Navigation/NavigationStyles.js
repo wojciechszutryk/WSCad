@@ -16,10 +16,24 @@ export const NavigationWrapper = styled.section`
     width: 100px;
     height: 50px;
   }
+
+  &:nth-child(3){
+    top: calc(100% - 350px);
+    left: calc(100% - 250px);
+    width: 200px;
+    height: 50px;
+  }
+
+  &:nth-child(4){
+    top: calc(100% - 500px);
+    left: calc(100% - 250px);
+    width: 200px;
+    height: 50px;
+  }
   
   &.minimized{
     top: calc(100% - 30px) !important;
-    left: calc(100% - 70px) !important;
+    left: calc(100% - 150px) !important;
     width: 50px;
     height: 30px;
     border-top-left-radius: 40px;
@@ -28,7 +42,15 @@ export const NavigationWrapper = styled.section`
     cursor: pointer;
     
     &:nth-child(2){
-      left: calc(100% - 150px) !important;
+      left: calc(100% - 80px) !important;
+    }
+
+    &:nth-child(3){
+      left: calc(100% - 220px) !important;
+    }
+
+    &:nth-child(4){
+      left: calc(100% - 290px) !important;
     }
 
     &:hover{

@@ -10,7 +10,7 @@ import {AppButtonsWrapper} from "./NavigationStyles";
 const AppSettings = ({darkTheme, themeToggle, resetMinimized}) => {
     const handleThemeChange = () => {
         themeToggle();
-        resetMinimized([false, false]);
+        resetMinimized([false, false, false, false]);
     }
 
     return (
