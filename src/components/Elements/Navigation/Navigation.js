@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faDraftingCompass, faCompress, faCog, faPalette} from '@fortawesome/free-solid-svg-icons'
 import AppSettings from "./AppSettings";
 import {faFileImage} from "@fortawesome/free-regular-svg-icons";
+import StyleSettings from "./StyleSettings";
 
 function dragElement(elem) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -102,7 +103,7 @@ const Navigation = () => {
                         <FontAwesomeIcon icon={faCompress} />}
                 </Minimizer>
                 <Dragger id="navigation4Dragger"/>
-                <AppSettings resetMinimized={setMinimized}/>
+                <StyleSettings/>
             </NavigationWrapper>
 
         </nav>

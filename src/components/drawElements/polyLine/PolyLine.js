@@ -33,11 +33,11 @@ const PolyLine = ({addPolyLine}) => {
     }, [addPolyLine]);
 
     const linesToDraw = pointsPosition.map((point, index) => {
-        if (pointsPosition.length === 1 || index === pointsPosition.length-1){
+        if (pointsValue.current.length === 1 || index === pointsPosition.length-1){
             return(
                 <LineSVG
                     key={index}
-                    id={index}
+                    id={index.toString()}
                     firstPointX = {point.x}
                     firstPointY = {point.y}
                     secondPointX = {cursorPosition.x}
@@ -48,6 +48,7 @@ const PolyLine = ({addPolyLine}) => {
         return(
             <LineSVG
                 key={index}
+                id={index}
                 firstPointX = {point.x}
                 firstPointY = {point.y}
                 secondPointX = {pointsPosition[index+1].x}

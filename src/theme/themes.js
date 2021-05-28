@@ -17,7 +17,8 @@ export const darkTheme = {
         hover: 'rgb(0,0,0)'
     },
     paper: {
-        normal: 'rgb(255,255,255)'
+        normal: 'rgb(255,255,255)',
+        hover: 'rgb(222,168,255)'
     }
 };
 
@@ -40,6 +41,7 @@ export const lightTheme = {
         hover: 'rgb(41,37,37)'
     },
     paper: {
-        normal: 'rgb(255,255,255)'
+        normal: 'rgb(255,255,255)',
+        hover: 'rgb(255,171,156)',
     }
 }

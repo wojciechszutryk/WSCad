@@ -9,7 +9,7 @@ const LineSVG = ({id,
                 secondPointX = 0,
                 secondPointY = 0,
                 canvasHeight = window.innerHeight,
-                canvasWidth = window.innerWidth,}) => {
+                canvasWidth = window.innerWidth}) => {
 
     const lineStyle = useMemo(() => ({
         stroke: color,
