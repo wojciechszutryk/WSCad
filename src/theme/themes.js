@@ -15,6 +15,9 @@ export const darkTheme = {
     icon: {
         normal: 'rgb(42,11,57)',
         hover: 'rgb(0,0,0)'
+    },
+    paper: {
+        normal: 'rgb(255,255,255)'
     }
 };
 
@@ -35,5 +38,8 @@ export const lightTheme = {
     icon: {
         normal: 'rgb(74,67,67)',
         hover: 'rgb(41,37,37)'
+    },
+    paper: {
+        normal: 'rgb(255,255,255)'
     }
 }
