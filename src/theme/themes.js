@@ -5,6 +5,7 @@ export const darkTheme = {
     },
     border: {
         normal: 'rgb(104,49,157)',
+        normalHover: 'rgb(124,69,177)',
         dark: 'rgb(72, 61, 139)',
         darkHover: 'rgb(118,57,177)'
     },
@@ -30,7 +31,9 @@ export const lightTheme = {
     },
     border: {
         normal: 'rgb(252, 110, 81)',
-        dark: 'rgb(235, 93, 64)'
+        normalHover: 'rgb(255, 120, 101)',
+        dark: 'rgb(235, 93, 64)',
+        darkHover: 'rgb(255, 103, 84)'
     },
     color: {
         normal: 'rgb(252, 110, 81)',

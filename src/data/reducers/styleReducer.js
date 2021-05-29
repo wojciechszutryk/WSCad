@@ -2,7 +2,7 @@ import {SET_COLOR, SET_FONT_SIZE, SET_LINE_WIDTH, SET_PATTERN} from "../constant
 
 const startState = {
     fontSize: 16,
-    color: 'red',
+    color: '#000000',
     pattern: '',
     lineWidth: 1,
 }

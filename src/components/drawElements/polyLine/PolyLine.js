@@ -4,7 +4,7 @@ import LineSVG from "../../Elements/line";
 import {connect} from "react-redux";
 import {addPolyLine} from "../../../data/actions/drawingActions/drawingActions";
 
-const PolyLine = ({addPolyLine}) => {
+const PolyLine = ({color, pattern, lineWidth,addPolyLine}) => {
     const cursorPosition = useMousePosition();
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
@@ -42,6 +42,9 @@ const PolyLine = ({addPolyLine}) => {
                     firstPointY = {point.y}
                     secondPointX = {cursorPosition.x}
                     secondPointY = {cursorPosition.y}
+                    color= {color}
+                    linePattern = {pattern}
+                    lineWidth = {lineWidth}
                 />
             )
         }
@@ -53,6 +56,9 @@ const PolyLine = ({addPolyLine}) => {
                 firstPointY = {point.y}
                 secondPointX = {pointsPosition[index+1].x}
                 secondPointY = {pointsPosition[index+1].y}
+                color= {color}
+                linePattern = {pattern}
+                lineWidth = {lineWidth}
             />
         )
     })
@@ -66,7 +72,11 @@ const PolyLine = ({addPolyLine}) => {
     );
 };
 
-const ConnectedPolyLine = connect(null,
+const ConnectedPolyLine = connect(state => ({
+    color: state.style.color,
+    pattern: state.style.pattern,
+    lineWidth: state.style.lineWidth,
+}),
     {
         addPolyLine,
     }

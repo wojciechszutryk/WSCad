@@ -11,6 +11,8 @@ import {faBorderStyle, faSlidersH} from "@fortawesome/free-solid-svg-icons";
 const StyleSettings = ({color, fontSize, pattern, lineWidth,
                        setFontSize, setColor, setPattern, setLineWidth}) => {
 
+                        console.log(color);
+
     const [, setC] = useState(color);
     const [, setFz] = useState(fontSize);
     const [, setP] = useState(pattern);
@@ -64,14 +66,13 @@ const StyleSettings = ({color, fontSize, pattern, lineWidth,
 
     return (
         <StyleButtonsWrapper>
-            <ColorInput type="color" onChange={handleColorChange}/>
+            <ColorInput type="color" onChange={handleColorChange} value={color}/>
             <NumberInput type="number" min={0} max={72} placeholder={'T'} onChange={handleFontSizeChange}/>
             <Select options={patternOptions} left={true}>
-                <FontAwesomeIcon icon={faBorderStyle} />
+                <FontAwesomeIcon icon={faBorderStyle} className={'innerIcon'}/>
             </Select>
-
             <Select options={lineWidthOptions}>
-                <FontAwesomeIcon icon={faSlidersH} />
+                <FontAwesomeIcon icon={faSlidersH} className={'innerIcon'}/>
             </Select>
         </StyleButtonsWrapper>
     );

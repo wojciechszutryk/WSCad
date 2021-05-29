@@ -4,7 +4,7 @@ import LineSVG from "../../Elements/line";
 import {addLine} from "../../../data/actions/drawingActions/drawingActions";
 import {connect} from "react-redux";
 
-const Line = ({lines, addLine}) => {
+const Line = ({color, pattern, lineWidth, lines, addLine}) => {
     const cursorPosition = useMousePosition();
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
@@ -52,6 +52,9 @@ const Line = ({lines, addLine}) => {
             firstPointY = {pointsPosition[0].y}
             secondPointX = {pointsPosition[1].x}
             secondPointY = {pointsPosition[1].y}
+            color= {color}
+            linePattern = {pattern}
+            lineWidth = {lineWidth}
         />)
     else if (pointsPosition.length === 1) lineToDraw = (
         <LineSVG
@@ -60,6 +63,9 @@ const Line = ({lines, addLine}) => {
             firstPointY = {pointsPosition[0].y}
             secondPointX = {cursorPosition.x}
             secondPointY = {cursorPosition.y}
+            color= {color}
+            linePattern = {pattern}
+            lineWidth = {lineWidth}
         />)
 
     return (
@@ -68,7 +74,12 @@ const Line = ({lines, addLine}) => {
 };
 
 const ConnectedLine = connect(state => ({
-        lines: state.elements.lines,}),
+        lines: state.elements.lines,
+        color: state.style.color,
+        fontSize: state.style.fontSize,
+        pattern: state.style.pattern,
+        lineWidth: state.style.lineWidth,
+    }),
     {
         addLine,
     }

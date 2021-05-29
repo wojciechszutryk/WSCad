@@ -13,6 +13,10 @@ const ParentInput = styled.input`
   border-radius: 20%;
   cursor: pointer;
   overflow: hidden;
+
+  &:hover{
+    border: 2px solid ${({theme}) => theme.border.normalHover};
+  }
 `;
 
 export const ColorInput = styled(ParentInput)`

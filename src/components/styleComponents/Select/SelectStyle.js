@@ -12,6 +12,17 @@ export const SelectStyle = styled.button`
     border-radius: 20%;
     cursor: pointer;
     overflow: hidden;
+    transition: .1s;
+
+    &:hover{
+      border: 2px solid ${({theme}) => theme.border.normalHover};
+    }
+
+    &:hover svg.innerIcon{
+      color: ${({theme}) => theme.border.normalHover};
+      width: 16px;
+      height: 16px;
+    }
 `;
 
 export const Options = styled.div`
@@ -21,7 +32,6 @@ export const Options = styled.div`
 `;
 
 export const OptionItem = styled.div`
-  background-color: red ;
   min-height: 30px;
   & svg{
     width: 100px;
