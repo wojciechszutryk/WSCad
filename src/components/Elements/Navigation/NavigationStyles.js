@@ -137,3 +137,5 @@ export const AppButtonsWrapper = styled.div`
   display: flex;
   padding: 8px 5px;
 `;
+
+export const StyleButtonsWrapper = styled(AppButtonsWrapper)``;

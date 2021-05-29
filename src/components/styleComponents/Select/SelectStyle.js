@@ -26,8 +26,10 @@ export const OptionItem = styled.div`
   & svg{
     width: 100px;
     background-color: ${({theme}) => theme.paper.normal};
-    transform: translateX(-35px);
+    //transform: translateX(-35px);
+    transform: ${props => props.left ? 'translateX(-70px)' : 'translateX(0)'};
     border: 2px solid ${({theme}) => theme.border.normal};
+    z-index: 1;
     &:hover{
       background-color: ${({theme}) => theme.paper.hover};
     }
