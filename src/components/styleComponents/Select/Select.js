@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {OptionItem, Options, SelectStyle} from "./SelectStyle";
+import {OptionItem, Options} from "./SelectStyle";
+import {NormalButton} from "../ButtonStyles";
 
 const Select = ({options, left=false, children}) => {
     const [optionsVisible, setOptionsVisible] = useState(false);
@@ -7,20 +8,20 @@ const Select = ({options, left=false, children}) => {
         setOptionsVisible(!optionsVisible);
     }
     const opt = options.map(opt => (
-        <OptionItem onClick={opt.onSelect} left={left}>
+        <OptionItem onClick={opt.onSelect} left={left} key={opt.onSelect}>
             {opt.line}
         </OptionItem>
     ));
     return (
         <>
-            <SelectStyle onClick={toggleOptions}>
+            <NormalButton onClick={toggleOptions}>
                 {children}
                 {optionsVisible ?
                     <Options>
                         {opt}
                     </Options>
                     : null}
-            </SelectStyle>
+            </NormalButton>
         </>
     );
 };

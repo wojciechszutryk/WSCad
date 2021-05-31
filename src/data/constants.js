@@ -4,6 +4,7 @@ export const POLYLINE_ADD = "POLYLINE_ADD";
 export const THEME_TOGGLE = "THEME_TOGGLE";
 export const SET_SHEET_WIDTH = "SET_SHEET_WIDTH";
 export const SET_SHEET_HEIGHT = "SET_SHEET_HEIGHT";
+export const SET_DRAWING = "SET_DRAWING";
 
 export const SET_FONT_SIZE = "SET_FONT_SIZE";
 export const SET_COLOR = "SET_COLOR";

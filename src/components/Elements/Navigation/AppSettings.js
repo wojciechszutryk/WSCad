@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {themeToggle} from "../../../data/actions/applicationActions/applicationActions";
 import {SetDarkButton, SetLightButton} from "../../styleComponents/ButtonStyles";
 import {faMoon, faSun} from "@fortawesome/free-regular-svg-icons";
-import {AppButtonsWrapper} from "./NavigationStyles";
+import {ButtonsWrapper} from "./NavigationStyles";
 
 const AppSettings = ({darkTheme, themeToggle, resetMinimized}) => {
     const handleThemeChange = () => {
@@ -14,12 +14,12 @@ const AppSettings = ({darkTheme, themeToggle, resetMinimized}) => {
     }
 
     return (
-        <AppButtonsWrapper>
+        <ButtonsWrapper>
             {darkTheme ?
                 <SetLightButton onClick={handleThemeChange}><FontAwesomeIcon icon={faCloud} /><FontAwesomeIcon icon={faSun} /></SetLightButton> :
                 <SetDarkButton onClick={handleThemeChange}><FontAwesomeIcon icon={faCloud} /><FontAwesomeIcon icon={faMoon} /></SetDarkButton>
             }
-        </AppButtonsWrapper>
+        </ButtonsWrapper>
     );
 };
 

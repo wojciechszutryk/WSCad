@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useMousePosition} from "../../../hooks/useMousePosition";
-import LineSVG from "../../Elements/line";
+import LineSVG from "../../sheetElements/line";
 import {addLine} from "../../../data/actions/drawingActions/drawingActions";
 import {connect} from "react-redux";
 

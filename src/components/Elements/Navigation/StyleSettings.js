@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
 import {setColor, setFontSize, setLineWidth, setPattern} from "../../../data/actions/styleActions/styleActions";
-import LineSVG from "../line";
+import LineSVG from "../../sheetElements/line";
 import Select from "../../styleComponents/Select/Select";
 import {ColorInput, NumberInput} from "../../styleComponents/Inputs";
-import {StyleButtonsWrapper} from "./NavigationStyles";
+import {ButtonsWrapper} from "./NavigationStyles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBorderStyle, faSlidersH} from "@fortawesome/free-solid-svg-icons";
 
@@ -63,7 +63,7 @@ const StyleSettings = ({color, fontSize, pattern, lineWidth,
     }
 
     return (
-        <StyleButtonsWrapper>
+        <ButtonsWrapper>
             <ColorInput type="color" onChange={handleColorChange} value={color}/>
             <NumberInput type="number" min={0} max={72} placeholder={'T'} onChange={handleFontSizeChange}/>
             <Select options={patternOptions} left={true}>
@@ -72,7 +72,7 @@ const StyleSettings = ({color, fontSize, pattern, lineWidth,
             <Select options={lineWidthOptions}>
                 <FontAwesomeIcon icon={faSlidersH} className={'innerIcon'}/>
             </Select>
-        </StyleButtonsWrapper>
+        </ButtonsWrapper>
     );
 };
 

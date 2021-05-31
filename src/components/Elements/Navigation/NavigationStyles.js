@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const NavigationWrapper = styled.section`
   position: absolute;
-  top: 10px;
-  left: calc(50% - 250px);
-  width: 500px;
+  top: 50px;
+  left: calc(100% - 350px);
+  width: 300px;
   height: 50px;
   background-color: ${({theme}) => theme.background.dark};
   border: 3px solid ${({theme}) => theme.border.normal};
@@ -14,21 +14,18 @@ export const NavigationWrapper = styled.section`
     top: calc(100% - 200px);
     left: calc(100% - 150px);
     width: 100px;
-    height: 50px;
   }
 
   &:nth-child(3){
     top: calc(100% - 350px);
     left: calc(100% - 250px);
     width: 200px;
-    height: 50px;
   }
 
   &:nth-child(4){
     top: calc(100% - 500px);
     left: calc(100% - 250px);
     width: 200px;
-    height: 50px;
   }
   
   &.minimized{
@@ -133,9 +130,7 @@ export const Minimizer = styled.button`
   }
 `;
 
-export const AppButtonsWrapper = styled.div`
+export const ButtonsWrapper = styled.div`
   display: flex;
   padding: 8px 5px;
 `;
-
-export const StyleButtonsWrapper = styled(AppButtonsWrapper)``;

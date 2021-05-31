@@ -8,6 +8,31 @@ const ParentButton = styled.button`
     }
 `;
 
+export const NormalButton = styled.button`
+  background-color: transparent;
+  color: ${({theme}) => theme.color.normal};
+  display: inline-block;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  margin-right: 3px;
+  border: 2px solid ${({theme}) => theme.border.normal};
+  border-radius: 20%;
+  cursor: pointer;
+  overflow: hidden;
+  transition: .1s;
+
+  &:hover{
+    border: 2px solid ${({theme}) => theme.border.normalHover};
+  }
+
+  &:hover svg.innerIcon{
+    color: ${({theme}) => theme.border.normalHover};
+    width: 16px;
+    height: 16px;
+  }
+`;
+
 export const SetDarkButton = styled(ParentButton)`
     background-color: transparent;
     color: ${({theme}) => theme.color.normal};
