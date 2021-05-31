@@ -4,23 +4,24 @@ import LineSVG from "../../Elements/line";
 import {connect} from "react-redux";
 import {addPolyLine} from "../../../data/actions/drawingActions/drawingActions";
 
-const PolyLine = ({color, pattern, lineWidth,addPolyLine, width}) => {
-    const offsetX = width+30;
+const PolyLine = ({color, pattern, lineWidth,addPolyLine, offset, sheetWidth, sheetHeight}) => {
+    const offsetX = offset+30;
     const offsetY = 10;
-    const cursorPosition = useMousePosition();
+    const cursorPosition = useMousePosition(offsetX,offsetY);
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
 
     useEffect(() => {
         const setFromEvent = (e) => {
-            pointsValue.current.push({x: e.clientX-offsetX, y: e.clientY-offsetY});
+            if (e.clientX < offsetX + sheetWidth && e.clientX > offsetX &&
+                e.clientY < offsetY + sheetHeight && e.clientY > offsetY) pointsValue.current.push({x: e.clientX-offsetX, y: e.clientY-offsetY});
             return setPointsPosition([...pointsValue.current])
         }
         const stopDrawing = (e) => {
             const clean = () => {
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
-                document.getElementById(`${pointsValue.current.length - 1}`).remove();
+                if (pointsValue.current.length > 0)document.getElementById(`${pointsValue.current.length - 1}`).remove();
                 addPolyLine(pointsValue.current);
             }
             if (e.code === 'Escape') return clean();
@@ -42,8 +43,8 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine, width}) => {
                     id={index.toString()}
                     firstPointX = {point.x}
                     firstPointY = {point.y}
-                    secondPointX = {cursorPosition.x-offsetX}
-                    secondPointY = {cursorPosition.y-offsetY}
+                    secondPointX = {cursorPosition.x}
+                    secondPointY = {cursorPosition.y}
                     color= {color}
                     linePattern = {pattern}
                     lineWidth = {lineWidth}
@@ -75,7 +76,9 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine, width}) => {
 };
 
 const ConnectedPolyLine = connect(state => ({
-    width: state.application.sheetOffset,
+    offset: state.application.sheetOffset,
+    sheetWidth: state.application.sheetWidth,
+    sheetHeight: state.application.sheetHeight,
     color: state.style.color,
     pattern: state.style.pattern,
     lineWidth: state.style.lineWidth,

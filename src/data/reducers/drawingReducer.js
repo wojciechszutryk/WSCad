@@ -3,6 +3,7 @@ import {LINE_ADD, POLYLINE_ADD} from "../constants";
 const startElements = {
     lines: [],
     polyLines: [],
+
 }
 
 const elements = (state= startElements, action) => {

@@ -5,13 +5,12 @@ import PolyLine from "../../drawElements/polyLine";
 import Line from "../../drawElements/line";
 import {connect} from "react-redux";
 
-const Workspace = ({width}) => {
-    console.log(width)
+const Workspace = ({offset,sheetWidth,sheetHeight}) => {
     return (
-        <WorkspaceWrapper width={width+30}>
+        <WorkspaceWrapper offset={offset+30}>
             <TransformWrapper>
                 <TransformComponent>
-                    <Sheet/>
+                    <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight}/>
                     {/*<Line/>*/}
                     <PolyLine/>
                 </TransformComponent>
@@ -21,7 +20,9 @@ const Workspace = ({width}) => {
 };
 
 const ConnectedWorkspace = connect(state => ({
-        width: state.application.sheetOffset,
+        offset: state.application.sheetOffset,
+        sheetWidth: state.application.sheetWidth,
+        sheetHeight: state.application.sheetHeight,
     }),null
 )(Workspace);
 

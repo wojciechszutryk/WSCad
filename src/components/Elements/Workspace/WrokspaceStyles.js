@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const Sheet = styled.div`
-  height: 29.7cm;
-  width: 21cm;
+  height: ${props => props.sheetHeight}px;
+  width: ${props => props.sheetWidth}px;
   background-color: ${({theme}) => theme.paper.normal};
 `;
 
 export const WorkspaceWrapper = styled.div`
   position: absolute;
   top: 10px;
-  bottom: 1%;
-  left: ${props => props.width}px;
+  bottom: 10px;
+  left: ${props => props.offset}px;
   overflow: hidden;
 `;

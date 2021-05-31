@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useMousePosition = (offsetX=0,offsetY=0) => {
+export const useMousePosition = (offsetX,offsetY) => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
@@ -10,7 +10,7 @@ export const useMousePosition = (offsetX=0,offsetY=0) => {
         return () => {
             window.removeEventListener("mousemove", setFromEvent);
         };
-    }, []);
+    }, [offsetX, offsetY]);
 
     return position;
 };

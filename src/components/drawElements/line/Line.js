@@ -4,8 +4,8 @@ import LineSVG from "../../Elements/line";
 import {addLine} from "../../../data/actions/drawingActions/drawingActions";
 import {connect} from "react-redux";
 
-const Line = ({color, pattern, lineWidth, lines, addLine, width}) => {
-    const offsetX = width+30;
+const Line = ({color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sheetHeight}) => {
+    const offsetX = offset+30;
     const offsetY = 10;
     const cursorPosition = useMousePosition(offsetX,offsetY);
     const pointsValue = useRef([]);
@@ -13,7 +13,8 @@ const Line = ({color, pattern, lineWidth, lines, addLine, width}) => {
 
     useEffect(() => {
         const setFromEvent = (e) => {
-            pointsValue.current.push({x: e.clientX-offsetX, y: e.clientY-offsetY});
+            if (e.clientX < offsetX + sheetWidth && e.clientX > offsetX &&
+                e.clientY < offsetY + sheetHeight && e.clientY > offsetY) pointsValue.current.push({x: e.clientX-offsetX, y: e.clientY-offsetY});
             const escapeFunction = () => {
                 setPointsPosition([...pointsValue.current])
                 stopDrawing()
@@ -76,7 +77,9 @@ const Line = ({color, pattern, lineWidth, lines, addLine, width}) => {
 };
 
 const ConnectedLine = connect(state => ({
-        width: state.application.sheetOffset,
+        offset: state.application.sheetOffset,
+        sheetWidth: state.application.sheetWidth,
+        sheetHeight: state.application.sheetHeight,
         lines: state.elements.lines,
         color: state.style.color,
         pattern: state.style.pattern,
