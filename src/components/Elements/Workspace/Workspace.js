@@ -6,13 +6,14 @@ import Line from "../../drawElements/line";
 import {connect} from "react-redux";
 
 const Workspace = ({offset,sheetWidth,sheetHeight}) => {
+    const wheel = (e) => {
+        console.log(e)
+    }
     return (
-        <WorkspaceWrapper offset={offset+30}>
+        <WorkspaceWrapper offset={offset+30} onScroll={wheel}>
             <TransformWrapper>
                 <TransformComponent>
-                    <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight}/>
-                    {/*<Line/>*/}
-                    <PolyLine/>
+                    <Sheet onClick={wheel} sheetWidth={sheetWidth} sheetHeight={sheetHeight}/>
                 </TransformComponent>
             </TransformWrapper>
         </WorkspaceWrapper>

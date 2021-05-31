@@ -22,7 +22,10 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine, offset, sheetWidth, sh
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
                 if (pointsValue.current.length > 0)document.getElementById(`${pointsValue.current.length - 1}`).remove();
-                addPolyLine(pointsValue.current);
+                const [PolyLine, styles] = [{}, {color, pattern, lineWidth}];
+                PolyLine['points'] = pointsValue.current;
+                PolyLine['styles'] = styles;
+                addPolyLine(PolyLine);
             }
             if (e.code === 'Escape') return clean();
         }
@@ -33,7 +36,7 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine, offset, sheetWidth, sh
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", stopDrawing);
         };
-    }, [addPolyLine]);
+    }, [addPolyLine, color, lineWidth, offsetX, pattern, sheetHeight, sheetWidth]);
 
     const linesToDraw = pointsPosition.map((point, index) => {
         if (pointsValue.current.length === 1 || index === pointsPosition.length-1){

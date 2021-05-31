@@ -31,8 +31,9 @@ const Line = ({color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sh
             const finish = () => {
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
-                const line = {}
-                line[lines.length] = pointsValue.current;
+                const [line, styles] = [{}, {color, pattern, lineWidth}];
+                line['points'] = pointsValue.current;
+                line['styles'] = styles;
                 addLine(line);
             }
             if (e && e.code === 'Escape') return clean();
@@ -45,7 +46,7 @@ const Line = ({color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sh
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", stopDrawing);
         };
-    }, [addLine]);
+    }, [addLine, color, lineWidth, lines.length, offsetX, pattern, sheetHeight, sheetWidth]);
 
     let lineToDraw = null;
     if (pointsPosition.length === 2) lineToDraw = (

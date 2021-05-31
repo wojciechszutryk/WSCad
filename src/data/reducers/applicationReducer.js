@@ -1,4 +1,4 @@
-import {LINE_ADD, SET_SHEET_HEIGHT, SET_SHEET_WIDTH, THEME_TOGGLE} from "../constants";
+import {SET_SHEET_HEIGHT, SET_SHEET_WIDTH, THEME_TOGGLE} from "../constants";
 
 const startState = {
     darkTheme: true,
