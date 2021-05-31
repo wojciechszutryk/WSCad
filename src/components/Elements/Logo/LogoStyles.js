@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const StyledLogo = styled.div`
   position: absolute;
-  top: 1%;
-  left: 2%;
+  top: 5px;
+  left: 15px;
   opacity: 0.5;
-  font-size: 7vh;
+  font-size: ${props => (props.width)/3}px;
+  width: ${props => props.width}px;
   & span:first-child{
     color: ${({theme}) => theme.color.normal};
     font-family: 'Trebuchet MS' , Roboto, sans-serif;

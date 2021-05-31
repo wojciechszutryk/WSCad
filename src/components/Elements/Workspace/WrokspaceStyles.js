@@ -8,8 +8,8 @@ export const Sheet = styled.div`
 
 export const WorkspaceWrapper = styled.div`
   position: absolute;
-  top: 1%;
+  top: 10px;
   bottom: 1%;
-  left: 25vh;
+  left: ${props => props.width}px;
   overflow: hidden;
 `;

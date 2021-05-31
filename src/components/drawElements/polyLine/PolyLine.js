@@ -4,14 +4,16 @@ import LineSVG from "../../Elements/line";
 import {connect} from "react-redux";
 import {addPolyLine} from "../../../data/actions/drawingActions/drawingActions";
 
-const PolyLine = ({color, pattern, lineWidth,addPolyLine}) => {
+const PolyLine = ({color, pattern, lineWidth,addPolyLine, width}) => {
+    const offsetX = width+30;
+    const offsetY = 10;
     const cursorPosition = useMousePosition();
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
 
     useEffect(() => {
         const setFromEvent = (e) => {
-            pointsValue.current.push({x: e.clientX, y: e.clientY});
+            pointsValue.current.push({x: e.clientX-offsetX, y: e.clientY-offsetY});
             return setPointsPosition([...pointsValue.current])
         }
         const stopDrawing = (e) => {
@@ -40,8 +42,8 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine}) => {
                     id={index.toString()}
                     firstPointX = {point.x}
                     firstPointY = {point.y}
-                    secondPointX = {cursorPosition.x}
-                    secondPointY = {cursorPosition.y}
+                    secondPointX = {cursorPosition.x-offsetX}
+                    secondPointY = {cursorPosition.y-offsetY}
                     color= {color}
                     linePattern = {pattern}
                     lineWidth = {lineWidth}
@@ -73,6 +75,7 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine}) => {
 };
 
 const ConnectedPolyLine = connect(state => ({
+    width: state.application.sheetOffset,
     color: state.style.color,
     pattern: state.style.pattern,
     lineWidth: state.style.lineWidth,

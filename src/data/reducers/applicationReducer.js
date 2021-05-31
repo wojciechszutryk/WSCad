@@ -2,6 +2,7 @@ import {THEME_TOGGLE} from "../constants";
 
 const startState = {
     darkTheme: true,
+    sheetOffset: Math.min(window.innerWidth*0.2, 200),
 }
 
 const application = (state= startState, action) => {

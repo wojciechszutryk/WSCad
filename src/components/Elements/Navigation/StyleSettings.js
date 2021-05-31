@@ -11,8 +11,6 @@ import {faBorderStyle, faSlidersH} from "@fortawesome/free-solid-svg-icons";
 const StyleSettings = ({color, fontSize, pattern, lineWidth,
                        setFontSize, setColor, setPattern, setLineWidth}) => {
 
-                        console.log(color);
-
     const [, setC] = useState(color);
     const [, setFz] = useState(fontSize);
     const [, setP] = useState(pattern);
