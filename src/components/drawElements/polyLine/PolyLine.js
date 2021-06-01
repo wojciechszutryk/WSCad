@@ -23,7 +23,6 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine, offset, sheetWidth, sh
             const clean = () => {
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
-                console.log(pointsValue.current.length)
                 if(pointsValue.current.length > 1){
                     document.getElementById('PolyLine'+polyLines.length+`${pointsValue.current.length - 1}`).remove();
                     const [PolyLine, styles] = [{}, {color, pattern, lineWidth}];

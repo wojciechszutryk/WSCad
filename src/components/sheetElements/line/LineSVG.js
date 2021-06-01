@@ -9,12 +9,13 @@ const LineSVG = ({id,
                 secondPointX = 0,
                 secondPointY = 0,
                 canvasHeight = window.innerHeight,
-                canvasWidth = window.innerWidth}) => {
+                canvasWidth = window.innerWidth,
+                onClick}) => {
 
     const lineStyle = useMemo(() => ({
         stroke: color,
         strokeWidth: lineWidth,
-        strokeDasharray: linePattern
+        strokeDasharray: linePattern,
     }), [color, lineWidth, linePattern]);
 
     return (
@@ -29,6 +30,7 @@ const LineSVG = ({id,
                 x2={secondPointX}
                 y2={secondPointY}
                 style={lineStyle}
+                onClick={onClick}
             />
         </svg>
     )

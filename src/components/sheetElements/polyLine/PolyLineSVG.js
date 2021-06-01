@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import LineSVG from "../line";
+import {DrawElementWrapper} from "../../drawElements/line/LineStyles";
 
 const PolyLineSVG = ({id,
                 color= 'red',
@@ -7,14 +8,15 @@ const PolyLineSVG = ({id,
                 lineWidth = 1,
                 points,
                 canvasHeight = window.innerHeight,
-                canvasWidth = window.innerWidth}) => {
+                canvasWidth = window.innerWidth,
+                onClick}) => {
 
     const polyLineToDraw = points.map((point, index) => {
         if (points[index+1]){
             return(
                 <LineSVG
                     key={index}
-                    id={index}
+                    id={id+'__'+index}
                     firstPointX = {point.x}
                     firstPointY = {point.y}
                     secondPointX = {points[index+1].x}
@@ -22,6 +24,7 @@ const PolyLineSVG = ({id,
                     color= {color}
                     linePattern = {linePattern}
                     lineWidth = {lineWidth}
+                    onClick = {() => onClick(id+'__'+index)}
                 />
             )
         }

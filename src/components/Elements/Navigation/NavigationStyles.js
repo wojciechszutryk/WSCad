@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const NavigationWrapper = styled.section`
   position: absolute;
   top: 50px;
-  left: calc(100% - 350px);
-  width: 300px;
+  left: calc(100% - 400px);
+  width: 350px;
   height: 50px;
   background-color: ${({theme}) => theme.background.dark};
   border: 3px solid ${({theme}) => theme.border.normal};
