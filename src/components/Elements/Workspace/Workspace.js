@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Sheet, WorkspaceWrapper} from "./WrokspaceStyles";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import PolyLine from "../../drawElements/polyLine";
@@ -8,13 +8,14 @@ import LineSVG from "../../sheetElements/line";
 import PolyLineSVG from "../../sheetElements/polyLine";
 
 const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight}) => {
-    const [toDraw, setToDraw] = useState([]);
     const lines = []
     const polyLines = []
-    const elements = Object.entries(drawings).map(element => {
+
+    Object.entries(drawings).forEach(element => {
         if (element[0] === 'lines'){
             return element[1].forEach(line => (
                 lines.push(<LineSVG
+                    key={line.points[0].x*line.points[1].y}
                     color = {line.styles.color}
                     linePattern = {line.styles.pattern}
                     lineWidth = {line.styles.lineWidth}
@@ -27,8 +28,8 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight}) => {
         }
         if (element[0] === 'polyLines'){
             return element[1].forEach(polyLine => {
-                console.log(polyLine)
                 polyLines.push(<PolyLineSVG
+                    key={polyLine.points[0].x*polyLine.points[1].y}
                     color = {polyLine.styles.color}
                     linePattern = {polyLine.styles.pattern}
                     lineWidth = {polyLine.styles.lineWidth}
@@ -38,18 +39,15 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight}) => {
         }
     })
 
-    console.log(polyLines)
-    // useMemo(() => {
-    //     if (drawing === 'line') {setToDraw([...toDraw,<Line/>])}
-    //     else if (drawing === 'polyLine') {setToDraw([...toDraw,<PolyLine/>])}
-    // },[drawing, toDraw])
     return (
         <WorkspaceWrapper offset={offset+30}>
             <TransformWrapper>
                 <TransformComponent>
                     <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight}/>
-                    <PolyLine/>
+                    {lines}
                     {polyLines}
+                    {drawing === 'line' && <Line/>}
+                    {drawing === 'polyLine' && <PolyLine/>}
                 </TransformComponent>
             </TransformWrapper>
         </WorkspaceWrapper>
