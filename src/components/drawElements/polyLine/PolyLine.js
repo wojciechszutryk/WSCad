@@ -2,11 +2,10 @@ import React, {useState, useEffect, useRef} from 'react';
 import {useMousePosition} from "../../../hooks/useMousePosition";
 import LineSVG from "../../sheetElements/line";
 import {connect} from "react-redux";
-import {addPolyLine} from "../../../data/actions/drawingActions/drawingActions";
+import {addLine} from "../../../data/actions/drawingActions/drawingActions";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
-import {DrawElementWrapper} from "../../wrappers/StyledComponentsWrappers";
 
-const PolyLine = ({color, pattern, lineWidth,addPolyLine, offset, sheetWidth, sheetHeight, setDrawing, polyLines}) => {
+const PolyLine = ({id, color, pattern, lineWidth, addLine, offset, sheetWidth, sheetHeight, setDrawing, polyLines}) => {
     const offsetX = offset+30;
     const offsetY = 10;
     const cursorPosition = useMousePosition(offsetX,offsetY);
@@ -24,11 +23,15 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine, offset, sheetWidth, sh
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
                 if(pointsValue.current.length > 1){
-                    document.getElementById('PolyLine'+polyLines.length+`${pointsValue.current.length - 1}`).remove();
-                    const [PolyLine, styles] = [{}, {color, pattern, lineWidth}];
-                    PolyLine['points'] = pointsValue.current;
-                    PolyLine['styles'] = styles;
-                    addPolyLine(PolyLine);
+                    pointsValue.current.forEach((point, index) => {
+                        if (pointsValue.current[index+1]){
+                            const [line, styles] = [{}, {color, pattern, lineWidth}];
+                            line['points'] = [pointsValue.current[index],pointsValue.current[index+1]];
+                            line['styles'] = styles;
+                            line['id'] = 'line__'+(parseInt(id.slice(6))+index);
+                            addLine(line);
+                        }
+                    });
                 }
                 setDrawing('');
             }
@@ -42,14 +45,13 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine, offset, sheetWidth, sh
             window.removeEventListener("keydown", stopDrawing);
             setDrawing('');
         };
-    }, [addPolyLine, color, lineWidth, offsetX, pattern, sheetHeight, sheetWidth]);
+    }, [id, setDrawing, addLine, color, lineWidth, offsetX, pattern, sheetHeight, sheetWidth]);
 
     const linesToDraw = pointsPosition.map((point, index) => {
         if (pointsValue.current.length === 1 || index === pointsPosition.length - 1) {
             return (
                 <LineSVG
                     key={index}
-                    id={'PolyLine'+polyLines.length+index.toString()}
                     firstPointX={point.x}
                     firstPointY={point.y}
                     secondPointX={cursorPosition.x}
@@ -63,7 +65,6 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine, offset, sheetWidth, sh
         return (
             <LineSVG
                 key={index}
-                id={index}
                 firstPointX={point.x}
                 firstPointY={point.y}
                 secondPointX={pointsPosition[index + 1].x}
@@ -78,9 +79,7 @@ const PolyLine = ({color, pattern, lineWidth,addPolyLine, offset, sheetWidth, sh
     return (
         pointsValue.current.length > 0
             ?
-            <DrawElementWrapper>
-                {linesToDraw}
-            </DrawElementWrapper>
+                linesToDraw
             :
                 null
     );
@@ -96,7 +95,7 @@ const ConnectedPolyLine = connect(state => ({
     lineWidth: state.style.lineWidth,
 }),
     {
-        addPolyLine,
+        addLine,
         setDrawing,
     }
 )(PolyLine);

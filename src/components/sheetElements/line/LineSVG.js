@@ -8,8 +8,6 @@ const LineSVG = ({id,
                 firstPointY = 0,
                 secondPointX = 0,
                 secondPointY = 0,
-                canvasHeight = window.innerHeight,
-                canvasWidth = window.innerWidth,
                 onClick}) => {
 
     const lineStyle = useMemo(() => ({
@@ -19,20 +17,15 @@ const LineSVG = ({id,
     }), [color, lineWidth, linePattern]);
 
     return (
-        <svg
-            id={id ? id : undefined}
-            height={canvasHeight}
-            width={canvasWidth}
-            style={{position: 'fixed'}}>
-            <line
-                x1={firstPointX}
-                y1={firstPointY}
-                x2={secondPointX}
-                y2={secondPointY}
-                style={lineStyle}
-                onClick={onClick}
-            />
-        </svg>
+        <line
+            id={id}
+            x1={firstPointX}
+            y1={firstPointY}
+            x2={secondPointX}
+            y2={secondPointY}
+            style={lineStyle}
+            onClick={onClick}
+        />
     )
 };
 

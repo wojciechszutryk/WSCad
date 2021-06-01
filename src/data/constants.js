@@ -1,5 +1,5 @@
 export const LINE_ADD = "LINE_ADD";
-export const POLYLINE_ADD = "POLYLINE_ADD";
+export const LINE_DELETE = "LINE_DELETE";
 
 export const THEME_TOGGLE = "THEME_TOGGLE";
 export const SET_SHEET_WIDTH = "SET_SHEET_WIDTH";

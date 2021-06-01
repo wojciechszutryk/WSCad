@@ -9,7 +9,9 @@ const Select = ({options, left=false, children}) => {
     }
     const opt = options.map(opt => (
         <OptionItem onClick={opt.onSelect} left={left} key={opt.onSelect}>
-            {opt.line}
+            <svg>
+                {opt.line}
+            </svg>
         </OptionItem>
     ));
     return (

@@ -1,14 +1,11 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import LineSVG from "../line";
-import {DrawElementWrapper} from "../../drawElements/line/LineStyles";
 
 const PolyLineSVG = ({id,
                 color= 'red',
                 linePattern = null,
                 lineWidth = 1,
                 points,
-                canvasHeight = window.innerHeight,
-                canvasWidth = window.innerWidth,
                 onClick}) => {
 
     const polyLineToDraw = points.map((point, index) => {

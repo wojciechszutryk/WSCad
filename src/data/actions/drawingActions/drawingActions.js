@@ -1,7 +1,5 @@
 import {
-    LINE_ADD,
-    POLYLINE_ADD
-
+    LINE_ADD, LINE_DELETE,
 } from '../../constants';
 
 export const addLine = line => {
@@ -11,9 +9,10 @@ export const addLine = line => {
     }
 };
 
-export const addPolyLine = polyLine => {
+export const deleteLine = id => {
+    console.log(id)
     return{
-        type: POLYLINE_ADD,
-        payload: polyLine
+        type: LINE_DELETE,
+        payload: id
     }
 };

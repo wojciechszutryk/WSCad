@@ -4,9 +4,8 @@ import LineSVG from "../../sheetElements/line";
 import {addLine} from "../../../data/actions/drawingActions/drawingActions";
 import {connect} from "react-redux";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
-import {DrawElementWrapper} from "../../wrappers/StyledComponentsWrappers";
 
-const Line = ({color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sheetHeight, drawing, setDrawing}) => {
+const Line = ({id, color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sheetHeight, drawing, setDrawing}) => {
     const offsetX = offset+30;
     const offsetY = 10;
     const cursorPosition = useMousePosition(offsetX,offsetY);
@@ -28,7 +27,6 @@ const Line = ({color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sh
             const clean = () => {
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
-                document.getElementById('line'+(lines.length)).remove();
                 setDrawing('');
             }
             const finish = () => {
@@ -37,6 +35,7 @@ const Line = ({color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sh
                 const [line, styles] = [{}, {color, pattern, lineWidth}];
                 line['points'] = pointsValue.current;
                 line['styles'] = styles;
+                line['id'] = id;
                 addLine(line);
                 setDrawing('');
             }
@@ -51,13 +50,12 @@ const Line = ({color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sh
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", stopDrawing);
         };
-    }, [addLine, color, lineWidth, lines.length, offsetX, pattern, sheetHeight, sheetWidth]);
+    }, [id, setDrawing, addLine, color, lineWidth, lines.length, offsetX, pattern, sheetHeight, sheetWidth]);
 
     let lineToDraw = null;
     if (drawing === '') lineToDraw = null;
     else if (pointsPosition.length === 2) lineToDraw = (
         <LineSVG
-            id={'line'+(lines.length)}
             firstPointX = {pointsPosition[0].x}
             firstPointY = {pointsPosition[0].y}
             secondPointX = {pointsPosition[1].x}
@@ -68,7 +66,6 @@ const Line = ({color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sh
         />)
     else if (pointsPosition.length === 1) lineToDraw = (
         <LineSVG
-            id={'line'+(lines.length)}
             firstPointX = {pointsPosition[0].x}
             firstPointY = {pointsPosition[0].y}
             secondPointX = {cursorPosition.x}
@@ -79,9 +76,7 @@ const Line = ({color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sh
         />)
 
     return (
-        <DrawElementWrapper>
-            {lineToDraw}
-        </DrawElementWrapper>
+        lineToDraw
     )
 };
 

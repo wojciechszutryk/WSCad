@@ -18,31 +18,31 @@ const StyleSettings = ({color, fontSize, pattern, lineWidth,
 
     const patternOptions = [
         { line: <LineSVG
-                color={color} linePattern={''} lineWidth={lineWidth} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0} canvasHeight={30} canvasWidth={70}
+                color={color} linePattern={''} lineWidth={lineWidth} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0}
             />, onSelect: () => handlePatternSelect('') },
         { line: <LineSVG
-                color={color} linePattern={'5'} lineWidth={lineWidth} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0} canvasHeight={30} canvasWidth={70}
+                color={color} linePattern={'5'} lineWidth={lineWidth} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0}
             />, onSelect: () => handlePatternSelect("5") },
         { line: <LineSVG
-                color={color} linePattern={'10'} lineWidth={lineWidth} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0} canvasHeight={30} canvasWidth={70}
+                color={color} linePattern={'10'} lineWidth={lineWidth} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0}
             />, onSelect: () => handlePatternSelect('10') },
         { line: <LineSVG
-                color={color} linePattern={'20'} lineWidth={lineWidth} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0} canvasHeight={30} canvasWidth={70}
+                color={color} linePattern={'20'} lineWidth={lineWidth} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0}
             />, onSelect: () => handlePatternSelect('20') },
     ]
 
     const lineWidthOptions = [
         { line: <LineSVG
-                color={color} linePattern={''} lineWidth={1} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0} canvasHeight={30} canvasWidth={70}
+                color={color} linePattern={''} lineWidth={1} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0}
             />, onSelect: () => handleLineWidthSelect(1) },
         { line: <LineSVG
-                color={color} linePattern={''} lineWidth={2} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0} canvasHeight={30} canvasWidth={70}
+                color={color} linePattern={''} lineWidth={2} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0}
             />, onSelect: () => handleLineWidthSelect(2) },
         { line: <LineSVG
-                color={color} linePattern={''} lineWidth={5} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0} canvasHeight={30} canvasWidth={70}
+                color={color} linePattern={''} lineWidth={5} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0}
             />, onSelect: () => handleLineWidthSelect(5) },
         { line: <LineSVG
-                color={color} linePattern={''} lineWidth={10} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0} canvasHeight={30} canvasWidth={70}
+                color={color} linePattern={''} lineWidth={10} firstPointX={0} firstPointY={0} secondPointX={70} secondPointY={0}
             />, onSelect: () => handleLineWidthSelect(10) },
     ]
     const handlePatternSelect = (pattern) => {
