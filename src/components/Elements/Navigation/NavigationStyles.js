@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const NavigationWrapper = styled.section`
   position: absolute;
   top: 50px;
-  left: calc(100% - 400px);
-  width: 350px;
+  left: calc(100% - 410px);
+  width: 360px;
   height: 50px;
   background-color: ${({theme}) => theme.background.dark};
   border: 3px solid ${({theme}) => theme.border.normal};
@@ -24,8 +24,8 @@ export const NavigationWrapper = styled.section`
 
   &:nth-child(4){
     top: calc(100% - 500px);
-    left: calc(100% - 250px);
-    width: 200px;
+    left: calc(100% - 260px);
+    width: 210px;
   }
   
   &.minimized{
@@ -133,4 +133,41 @@ export const Minimizer = styled.button`
 export const ButtonsWrapper = styled.div`
   display: flex;
   padding: 8px 5px;
+`;
+
+export const StyleInfo = styled.div`
+  position: absolute;
+  top: -50px;
+  background-color: ${({theme}) => theme.background.normal};
+  color: ${({theme}) => theme.font.normal};
+  display: inline-block;
+  width: 84px;
+  height: 34px;
+  margin-right: 3px;
+  border: 2px solid ${({theme}) => theme.border.normal};
+  text-align: center;
+  line-height: 34px;
+  transition: .1s;
+  font-family: roboto, sans-serif;
+  font-size: 12px;
+  &.firstStyle{
+    top: -90px;
+    left: -30px;
+  }
+  &.secondStyle{
+    left: -30px;
+    cursor: pointer;
+    background-color: ${({theme}) => theme.background.normalHover};
+  }
+  &.thirdStyle{
+    top: -90px;
+    left: 120px;
+  }
+  &.fourthStyle{
+    left: 120px;
+    cursor: pointer;
+    &:hover{
+      background-color: ${({theme}) => theme.background.normalHover};
+    }
+  }
 `;

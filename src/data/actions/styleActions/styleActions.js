@@ -1,5 +1,5 @@
 import {
-    SET_COLOR,
+    SET_COLOR, SET_FILL,
     SET_FONT_SIZE, SET_LINE_WIDTH, SET_PATTERN
 
 } from '../../constants';
@@ -15,6 +15,13 @@ export const setColor = color => {
     return{
         type: SET_COLOR,
         payload: color
+    }
+};
+
+export const setFill = fill => {
+    return{
+        type: SET_FILL,
+        payload: fill
     }
 };
 

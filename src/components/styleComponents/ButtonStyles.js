@@ -31,6 +31,15 @@ export const NormalButton = styled.button`
     width: 16px;
     height: 16px;
   }
+  
+  &.selected{
+    border: 2px solid ${({theme}) => theme.border.normalHover};
+    & svg.innerIcon{
+      color: ${({theme}) => theme.border.normalHover};
+      width: 16px;
+      height: 16px;
+    }
+  }
 `;
 
 export const SetDarkButton = styled(ParentButton)`

@@ -7,21 +7,29 @@ import {connect} from "react-redux";
 import LineSVG from "../../sheetElements/line";
 import PolyLineSVG from "../../sheetElements/polyLine";
 import Sheet from "./Sheet";
-import {deleteLine} from "../../../data/actions/drawingActions/drawingActions";
+import {deleteCircle, deleteLine, deleteRect} from "../../../data/actions/drawingActions/drawingActions";
+import CircleSVG from "../../sheetElements/circle";
+import Circle from "../../drawElements/circle/Circle";
 
-const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLine}) => {
+const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLine, deleteCircle, deleteRect}) => {
     const lines = []
     const polyLines = []
+    const circles = []
+    const rects = []
 
-    const handleOnClick = (id) => {
+    const handleOnClick = (id, type) => {
         const onSelect = (id) => {
             console.log('select '+id)
         }
-        const onDelete = (id) => {
-            deleteLine(id)
+        const onDelete = (id, type) => {
+            switch (type) {
+                case "circle": deleteCircle(id); break;
+                case "rect": deleteRect(id); break;
+                default: deleteLine(id); break;
+            }
         }
         if (drawing === 'select') return onSelect(id);
-        else if (drawing === 'delete') return onDelete(id);
+        else if (drawing === 'delete') return onDelete(id,type);
         else return () => {}
     }
 
@@ -38,7 +46,23 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
                     firstPointY = {line.points[0].y}
                     secondPointX = {line.points[1].x}
                     secondPointY = {line.points[1].y}
-                    onClick = {() => handleOnClick(line.id)}
+                    onClick = {() => handleOnClick(line.id, 'line')}
+                />)
+            ))
+        }
+        if (element[0] === 'circles'){
+            return element[1].forEach((circle) => (
+                circles.push(<CircleSVG
+                    id={circle.id}
+                    key={circle.point.x*circle.point.y}
+                    color = {circle.styles.color}
+                    fillColor = {circle.styles.fillColor}
+                    linePattern = {circle.styles.pattern}
+                    lineWidth = {circle.styles.lineWidth}
+                    centerX = {circle.point.x}
+                    centerY = {circle.point.y}
+                    radius = {circle.radius}
+                    onClick = {() => handleOnClick(circle.id, 'circle')}
                 />)
             ))
         }
@@ -51,7 +75,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
                     linePattern = {polyLine.styles.pattern}
                     lineWidth = {polyLine.styles.lineWidth}
                     points={polyLine.points}
-                    onClick = {(id) => handleOnClick(id)}
+                    onClick = {(id) => handleOnClick(id, 'line')}
                 />)
             })
         }
@@ -62,9 +86,11 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
             <TransformWrapper>
                 <TransformComponent>
                     <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
-                        {lines}
+                        {circles}
                         {polyLines}
+                        {lines}
                         {drawing === 'line' && <Line id={'line__'+drawings.lines.length}/>}
+                        {drawing === 'circle' && <Circle id={'circle__'+drawings.circles.length}/>}
                         {drawing === 'polyLine' && <PolyLine id={'line__'+drawings.lines.length}/>}
                     </Sheet>
                 </TransformComponent>
@@ -81,6 +107,8 @@ const ConnectedWorkspace = connect(state => ({
         sheetHeight: state.application.sheetHeight,
     }), {
         deleteLine,
+        deleteCircle,
+        deleteRect,
     }
 )(Workspace);
 

@@ -20,7 +20,7 @@ const ParentInput = styled.input`
 `;
 
 export const ColorInput = styled(ParentInput)`
-
+  position: relative;
 `;
 
 export const NumberInput = styled(ParentInput)`

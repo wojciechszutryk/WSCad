@@ -8,6 +8,7 @@ export const SheetStyles = styled.div`
   & svg{
     & *:hover{
       cursor: ${props => props.cursorHover};
+      opacity: ${props => props.cursorHover !== 'default' ? 0.6 : 1};
     }
   }
 `;
