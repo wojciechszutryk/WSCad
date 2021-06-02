@@ -24,8 +24,8 @@ const DrawingOptions = ({setDrawing, drawing}) => {
             <NormalButton className={drawing === 'curve' ? 'selected' : null}>
                 <FontAwesomeIcon icon={faBezierCurve} onClick={() => setDrawing('curve')} className={'innerIcon'}/>
             </NormalButton>
-            <NormalButton className={drawing === 'rectangle' ? 'selected' : null}>
-                <FontAwesomeIcon icon={faSquare} onClick={() => setDrawing('rectangle')} className={'innerIcon'}/>
+            <NormalButton className={drawing === 'rect' ? 'selected' : null}>
+                <FontAwesomeIcon icon={faSquare} onClick={() => setDrawing('rect')} className={'innerIcon'}/>
             </NormalButton>
             <NormalButton className={drawing === 'circle' ? 'selected' : null}>
                 <FontAwesomeIcon icon={faCircle} onClick={() => setDrawing('circle')} className={'innerIcon'}/>

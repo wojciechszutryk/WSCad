@@ -10,6 +10,8 @@ import Sheet from "./Sheet";
 import {deleteCircle, deleteLine, deleteRect} from "../../../data/actions/drawingActions/drawingActions";
 import CircleSVG from "../../sheetElements/circle";
 import Circle from "../../drawElements/circle/Circle";
+import RectSVG from "../../sheetElements/rect";
+import Rect from "../../drawElements/rect/Rect";
 
 const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLine, deleteCircle, deleteRect}) => {
     const lines = []
@@ -66,6 +68,23 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
                 />)
             ))
         }
+        if (element[0] === 'rects'){
+            return element[1].forEach((rect) => (
+                rects.push(<RectSVG
+                    id={rect.id}
+                    key={rect.point.x*rect.point.y}
+                    color = {rect.styles.color}
+                    fillColor = {rect.styles.fillColor}
+                    linePattern = {rect.styles.pattern}
+                    lineWidth = {rect.styles.lineWidth}
+                    positionX = {rect.point.x}
+                    positionY = {rect.point.y}
+                    width ={rect.width}
+                    height ={rect.height}
+                    onClick = {() => handleOnClick(rect.id, 'rect')}
+                />)
+            ))
+        }
         if (element[0] === 'polyLines'){
             return element[1].forEach((polyLine,index) => {
                 polyLines.push(<PolyLineSVG
@@ -86,12 +105,14 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
             <TransformWrapper>
                 <TransformComponent>
                     <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
+                        {rects}
                         {circles}
                         {polyLines}
                         {lines}
-                        {drawing === 'line' && <Line id={'line__'+drawings.lines.length}/>}
+                        {drawing === 'rect' && <Rect id={'rect__'+drawings.rects.length}/>}
                         {drawing === 'circle' && <Circle id={'circle__'+drawings.circles.length}/>}
                         {drawing === 'polyLine' && <PolyLine id={'line__'+drawings.lines.length}/>}
+                        {drawing === 'line' && <Line id={'line__'+drawings.lines.length}/>}
                     </Sheet>
                 </TransformComponent>
             </TransformWrapper>

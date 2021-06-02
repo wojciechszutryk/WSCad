@@ -16,6 +16,7 @@ const Sheet = ({sheetWidth, sheetHeight, drawing, children}) => {
             break;
         default:
             cursorOverall = 'crosshair'
+            cursorHover = 'crosshair'
     }
     return (
         <SheetStyles

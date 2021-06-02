@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useMousePosition} from "../../../hooks/useMousePosition";
-import LineSVG from "../../sheetElements/line";
-import {addLine} from "../../../data/actions/drawingActions/drawingActions";
+import {addRect} from "../../../data/actions/drawingActions/drawingActions";
 import {connect} from "react-redux";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
+import RectSVG from "../../sheetElements/rect";
 
-const Line = ({id, color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sheetHeight, drawing, setDrawing}) => {
+const Rect = ({id, color, pattern, lineWidth, fillColor, rects, addRect, offset, sheetWidth, sheetHeight, drawing, setDrawing}) => {
     const offsetX = offset+30;
     const offsetY = 10;
     const cursorPosition = useMousePosition(offsetX,offsetY);
@@ -32,11 +32,13 @@ const Line = ({id, color, pattern, lineWidth, lines, addLine, offset, sheetWidth
             const finish = () => {
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
-                const [line, styles] = [{}, {color, pattern, lineWidth}];
-                line['points'] = pointsValue.current;
-                line['styles'] = styles;
-                line['id'] = id;
-                addLine(line);
+                const [rect, styles] = [{}, {color, pattern, fillColor, lineWidth}];
+                rect['point'] = {x: Math.min(pointsValue.current[0].x,pointsValue.current[1].x), y:Math.min(pointsValue.current[0].y,pointsValue.current[1].y)};
+                rect['width'] = Math.abs(pointsValue.current[0].x - pointsValue.current[1].x)
+                rect['height'] = Math.abs(pointsValue.current[0].y - pointsValue.current[1].y)
+                rect['styles'] = styles;
+                rect['id'] = id;
+                addRect(rect);
                 setDrawing('');
             }
             if (e && e.code === 'Escape') return clean();
@@ -50,50 +52,57 @@ const Line = ({id, color, pattern, lineWidth, lines, addLine, offset, sheetWidth
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", stopDrawing);
         };
-    }, [id, setDrawing, addLine, color, lineWidth, lines.length, offsetX, pattern, sheetHeight, sheetWidth]);
+    }, [id, setDrawing, addRect, color, fillColor, lineWidth, rects.length, offsetX, pattern, sheetHeight, sheetWidth]);
 
-    let lineToDraw = null;
-    if (drawing === '') lineToDraw = null;
-    else if (pointsPosition.length === 2) lineToDraw = (
-        <LineSVG
-            firstPointX = {pointsPosition[0].x}
-            firstPointY = {pointsPosition[0].y}
-            secondPointX = {pointsPosition[1].x}
-            secondPointY = {pointsPosition[1].y}
-            color= {color}
-            linePattern = {pattern}
-            lineWidth = {lineWidth}
-        />)
-    else if (pointsPosition.length === 1) lineToDraw = (
-        <LineSVG
-            firstPointX = {pointsPosition[0].x}
-            firstPointY = {pointsPosition[0].y}
-            secondPointX = {cursorPosition.x}
-            secondPointY = {cursorPosition.y}
-            color= {color}
-            linePattern = {pattern}
-            lineWidth = {lineWidth}
-        />)
+    let rectToDraw = null;
+    if (drawing === '') rectToDraw = null;
+    else if (pointsPosition.length === 2) {
+        rectToDraw = (
+            <RectSVG
+                positionX = {Math.min(pointsPosition[0].x,pointsPosition[1].x)}
+                positionY = {Math.min(pointsPosition[0].y,pointsPosition[1].y)}
+                width = {Math.abs(pointsPosition[0].x - pointsPosition[1].x)}
+                height = {Math.abs(pointsPosition[0].y - pointsPosition[1].y)}
+                color = {color}
+                linePattern = {pattern}
+                lineWidth = {lineWidth}
+                fillColor = {fillColor}
+            />)
+    }
+    else if (pointsPosition.length === 1) {
+        rectToDraw = (
+            <RectSVG
+                positionX = {Math.min(pointsPosition[0].x, cursorPosition.x)}
+                positionY = {Math.min(pointsPosition[0].y, cursorPosition.y)}
+                width = {Math.abs(cursorPosition.x - pointsPosition[0].x)}
+                height = {Math.abs(cursorPosition.y - pointsPosition[0].y)}
+                color= {color}
+                linePattern = {pattern}
+                lineWidth = {lineWidth}
+                fillColor = {fillColor}
+            />)
+    }
 
     return (
-        lineToDraw
+        rectToDraw
     )
 };
 
-const ConnectedLine = connect(state => ({
+const ConnectedRect = connect(state => ({
         drawing: state.application.drawing,
         offset: state.application.sheetOffset,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
-        lines: state.elements.lines,
+        rects: state.elements.rects,
         color: state.style.color,
+        fillColor: state.style.fill,
         pattern: state.style.pattern,
         lineWidth: state.style.lineWidth,
     }),
     {
-        addLine,
+        addRect,
         setDrawing,
     }
-)(Line);
+)(Rect);
 
-export default ConnectedLine;
+export default ConnectedRect;

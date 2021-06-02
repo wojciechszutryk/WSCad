@@ -13,12 +13,12 @@ const RectSVG = ({id,
                 fillColor = 'transparent',
                 onClick}) => {
 
-    const circleStyle = useMemo(() => ({
+    const rectStyle = useMemo(() => ({
         stroke: color,
         strokeWidth: lineWidth,
         strokeDasharray: linePattern,
         fill: fillColor,
-    }), [color, lineWidth, linePattern]);
+    }), [color, lineWidth, linePattern, fillColor]);
 
     return (
         <rect
@@ -29,7 +29,7 @@ const RectSVG = ({id,
             ry={radiusY}
             width={width}
             height={height}
-            style={circleStyle}
+            style={rectStyle}
             onClick={onClick}
         />
     )
