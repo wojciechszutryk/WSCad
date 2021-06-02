@@ -61,7 +61,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
         <WorkspaceWrapper offset={offset+30}>
             <TransformWrapper>
                 <TransformComponent>
-                    <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight}>
+                    <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
                         {lines}
                         {polyLines}
                         {drawing === 'line' && <Line id={'line__'+drawings.lines.length}/>}

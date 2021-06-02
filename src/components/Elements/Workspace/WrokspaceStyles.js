@@ -4,6 +4,12 @@ export const SheetStyles = styled.div`
   height: ${props => props.sheetHeight}px;
   width: ${props => props.sheetWidth}px;
   background-color: ${({theme}) => theme.paper.normal};
+  cursor: ${props => props.cursorOverall};
+  & svg{
+    & *:hover{
+      cursor: ${props => props.cursorHover};
+    }
+  }
 `;
 
 export const WorkspaceWrapper = styled.div`
