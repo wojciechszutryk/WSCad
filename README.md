@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+### WsCAD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+DEMO: https://wojciechszutryk.github.io/WSCad/
 
-## Available Scripts
+## Project Status
 
-In the project directory, you can run:
+This project is currently in development. Frontend part done in 60%.
 
-### `npm start`
+## Project Screen Shot(s)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![image](https://user-images.githubusercontent.com/72247608/119134087-fec41700-ba3c-11eb-8277-755383853606.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![image](https://user-images.githubusercontent.com/72247608/119134118-05528e80-ba3d-11eb-8fd3-2846fa8dae6a.png)
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-minimize and maximize menus
 
-### `npm run build`
+-move menus
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-switching themes between light and dark
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-zooming in and out, panning, pinching, moving sheet
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-resizing ang changing orientatnio of sheet
 
-### `npm run eject`
+-drawing line, polyline, rectangle, circle, curve
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-adding text and images
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-makeing "hand" notes
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-changing style (color, fill, thickness, fontSize, pattern) of objects
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+-selecting and deleting sheet objects
 
-## Learn More
+-importing work from file
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-exporting work to file
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-printing sheet
 
-### Code Splitting
+-showing notification on menu elements hover
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Installation and Setup Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
-### Making a Progressive Web App
+Installation:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`npm install`  
 
-### Advanced Configuration
+To Start Server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+`npm start`  
 
-### Deployment
+To Visit App:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+`localhost:3000`  
 
-### `npm run build` fails to minify
+## Reflection
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Application written to learn React and Redux and because of the desire to create my own version of paint/autoCad
