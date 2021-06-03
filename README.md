@@ -8,9 +8,7 @@ This project is currently in development. Frontend part done in 60%.
 
 ## Project Screen Shot(s)
 
-![image](https://user-images.githubusercontent.com/72247608/119134087-fec41700-ba3c-11eb-8277-755383853606.png)
-
-![image](https://user-images.githubusercontent.com/72247608/119134118-05528e80-ba3d-11eb-8fd3-2846fa8dae6a.png)
+![image](https://user-images.githubusercontent.com/72247608/120693153-f4783300-c4a8-11eb-9f75-ecfc3724db3b.png)
 
 ## Features
 
