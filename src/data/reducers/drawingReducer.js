@@ -6,7 +6,7 @@ import {
     LINE_ADD,
     LINE_DELETE,
     RECT_ADD,
-    RECT_DELETE
+    RECT_DELETE, TEXT_ADD, TEXT_DELETE
 } from "../constants";
 
 const startElements = {
@@ -14,6 +14,7 @@ const startElements = {
     circles: [],
     rects: [],
     curves: [],
+    texts: [],
 }
 
 const elements = (state= startElements, action) => {
@@ -50,6 +51,14 @@ const elements = (state= startElements, action) => {
                     ...state.curves,
                 ]
             }
+        case TEXT_ADD:
+            return {
+                ...state,
+                texts: [
+                    action.payload,
+                    ...state.texts,
+                ]
+            }
         case LINE_DELETE:
             return {
                 ...state,
@@ -69,6 +78,11 @@ const elements = (state= startElements, action) => {
             return {
                 ...state,
                 curves: state.curves.filter(curve => curve.id !== action.payload),
+            }
+        case TEXT_DELETE:
+            return {
+                ...state,
+                texts: state.texts.filter(text => text.id !== action.payload),
             }
         default:
             return state;

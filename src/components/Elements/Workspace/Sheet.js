@@ -8,6 +8,9 @@ const Sheet = ({sheetWidth, sheetHeight, drawing, children}) => {
         case 'select':
             cursorHover = 'pointer'
             break;
+        case 'text':
+            cursorOverall = 'text'
+            break;
         case 'delete':
             cursorHover = 'not-allowed'
             break;

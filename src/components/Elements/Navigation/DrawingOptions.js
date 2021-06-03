@@ -2,7 +2,18 @@ import React from 'react';
 import {connect} from "react-redux";
 import {ButtonsWrapper} from "./NavigationStyles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGripLines, faTrash, faImage, faPencilAlt, faDrawPolygon, faBezierCurve, faFont, faSquare, faCircle, faMousePointer} from "@fortawesome/free-solid-svg-icons";
+import {
+    faGripLines,
+    faTrash,
+    faImage,
+    faPencilAlt,
+    faDrawPolygon,
+    faBezierCurve,
+    faSquare,
+    faCircle,
+    faMousePointer,
+    faUnderline
+} from "@fortawesome/free-solid-svg-icons";
 import {NormalButton} from "../../styleComponents/ButtonStyles";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
 
@@ -23,6 +34,9 @@ const DrawingOptions = ({setDrawing, drawing}) => {
             </NormalButton>
             <NormalButton className={drawing === 'curve' ? 'selected' : null}>
                 <FontAwesomeIcon icon={faBezierCurve} onClick={() => setDrawing('curve')} className={'innerIcon'}/>
+            </NormalButton>
+            <NormalButton className={drawing === 'text' ? 'selected' : null}>
+                <FontAwesomeIcon icon={faUnderline} onClick={() => setDrawing('text')} className={'innerIcon'}/>
             </NormalButton>
             <NormalButton className={drawing === 'rect' ? 'selected' : null}>
                 <FontAwesomeIcon icon={faSquare} onClick={() => setDrawing('rect')} className={'innerIcon'}/>
