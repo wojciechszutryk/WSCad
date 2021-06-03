@@ -1,9 +1,19 @@
-import {CIRCLE_ADD, CIRCLE_DELETE, LINE_ADD, LINE_DELETE, RECT_ADD, RECT_DELETE} from "../constants";
+import {
+    CIRCLE_ADD,
+    CIRCLE_DELETE,
+    CURVE_ADD,
+    CURVE_DELETE,
+    LINE_ADD,
+    LINE_DELETE,
+    RECT_ADD,
+    RECT_DELETE
+} from "../constants";
 
 const startElements = {
     lines: [],
     circles: [],
     rects: [],
+    curves: [],
 }
 
 const elements = (state= startElements, action) => {
@@ -32,6 +42,14 @@ const elements = (state= startElements, action) => {
                     ...state.rects,
                 ]
             }
+        case CURVE_ADD:
+            return {
+                ...state,
+                curves: [
+                    action.payload,
+                    ...state.curves,
+                ]
+            }
         case LINE_DELETE:
             return {
                 ...state,
@@ -46,6 +64,11 @@ const elements = (state= startElements, action) => {
             return {
                 ...state,
                 rects: state.rects.filter(rect => rect.id !== action.payload),
+            }
+        case CURVE_DELETE:
+            return {
+                ...state,
+                curves: state.curves.filter(curve => curve.id !== action.payload),
             }
         default:
             return state;

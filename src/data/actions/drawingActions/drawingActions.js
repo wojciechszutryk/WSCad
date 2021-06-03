@@ -1,6 +1,6 @@
 import {
     CIRCLE_ADD,
-    CIRCLE_DELETE,
+    CIRCLE_DELETE, CURVE_ADD, CURVE_DELETE,
     LINE_ADD, LINE_DELETE, RECT_ADD, RECT_DELETE,
 } from '../../constants';
 
@@ -25,6 +25,13 @@ export const addRect = rect => {
     }
 };
 
+export const addCurve = curve => {
+    return{
+        type: CURVE_ADD,
+        payload: curve
+    }
+};
+
 export const deleteLine = id => {
     return{
         type: LINE_DELETE,
@@ -42,6 +49,13 @@ export const deleteCircle = id => {
 export const deleteRect = id => {
     return{
         type: RECT_DELETE,
+        payload: id
+    }
+};
+
+export const deleteCurve = id => {
+    return{
+        type: CURVE_DELETE,
         payload: id
     }
 };

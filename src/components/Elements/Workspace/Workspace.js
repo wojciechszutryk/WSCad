@@ -7,17 +7,20 @@ import {connect} from "react-redux";
 import LineSVG from "../../sheetElements/line";
 import PolyLineSVG from "../../sheetElements/polyLine";
 import Sheet from "./Sheet";
-import {deleteCircle, deleteLine, deleteRect} from "../../../data/actions/drawingActions/drawingActions";
+import {deleteCircle, deleteCurve, deleteLine, deleteRect} from "../../../data/actions/drawingActions/drawingActions";
 import CircleSVG from "../../sheetElements/circle";
 import Circle from "../../drawElements/circle/Circle";
 import RectSVG from "../../sheetElements/rect";
 import Rect from "../../drawElements/rect/Rect";
+import Curve from "../../drawElements/curve/Curve";
+import CurveSVG from "../../sheetElements/curve";
 
-const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLine, deleteCircle, deleteRect}) => {
+const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLine, deleteCircle, deleteRect, deleteCurve}) => {
     const lines = []
     const polyLines = []
     const circles = []
     const rects = []
+    const curves = []
 
     const handleOnClick = (id, type) => {
         const onSelect = (id) => {
@@ -27,6 +30,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
             switch (type) {
                 case "circle": deleteCircle(id); break;
                 case "rect": deleteRect(id); break;
+                case "curve": deleteCurve(id); break;
                 default: deleteLine(id); break;
             }
         }
@@ -98,15 +102,32 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
                 />)
             })
         }
+        if (element[0] === 'curves'){
+            return element[1].forEach((curve,index) => {
+                curves.push(<CurveSVG
+                    id={'curve__'+index}
+                    key={curve.d}
+                    color = {curve.styles.color}
+                    fillColor = {curve.styles.fillColor}
+                    linePattern = {curve.styles.pattern}
+                    lineWidth = {curve.styles.lineWidth}
+                    d={curve.d}
+                    onClick = {() => handleOnClick('curve__'+index, 'curve')}
+                />)
+            })
+        }
     })
 
+    console.log(drawing)
+
     return (
-        <WorkspaceWrapper offset={offset+30}>
-            <TransformWrapper>
+        <WorkspaceWrapper offset={offset+30} sheetWidth={sheetWidth} sheetHeight={sheetHeight}>
+            <TransformWrapper options={drawing === 'curve' ? {disabled: true} : {disabled: false}}>
                 <TransformComponent>
                     <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
                         {rects}
                         {circles}
+                        {curves}
                         {polyLines}
                         {lines}
                         {drawing === 'rect' && <Rect id={'rect__'+drawings.rects.length}/>}
@@ -114,6 +135,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
                         {drawing === 'polyLine' && <PolyLine id={'line__'+drawings.lines.length}/>}
                         {drawing === 'line' && <Line id={'line__'+drawings.lines.length}/>}
                     </Sheet>
+                    {drawing === 'curve' && <Curve id={'curve__'+drawings.curves.length}/>}
                 </TransformComponent>
             </TransformWrapper>
         </WorkspaceWrapper>
@@ -130,6 +152,7 @@ const ConnectedWorkspace = connect(state => ({
         deleteLine,
         deleteCircle,
         deleteRect,
+        deleteCurve,
     }
 )(Workspace);
 
