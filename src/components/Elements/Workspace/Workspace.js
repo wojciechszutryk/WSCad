@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {WorkspaceWrapper} from "./WrokspaceStyles";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import PolyLine from "../../drawElements/polyLine";
@@ -22,6 +22,8 @@ import Curve from "../../drawElements/curve/Curve";
 import CurveSVG from "../../sheetElements/curve";
 import Text from "../../drawElements/text";
 import TextSVG from "../../sheetElements/text";
+import Pencil from "../../drawElements/pencil";
+import {Canvas} from "../../drawElements/pencil/PencilStyles";
 
 const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLine, deleteCircle, deleteText, deleteRect, deleteCurve}) => {
     const lines = []
@@ -113,7 +115,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
             })
         }
         if (element[0] === 'curves'){
-            return element[1].forEach((curve,index) => {
+            return element[1].forEach((curve) => {
                 curves.push(<CurveSVG
                     id={curve.id}
                     key={curve.d}
@@ -127,7 +129,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
             })
         }
         if (element[0] === 'texts'){
-            return element[1].forEach((text,index) => {
+            return element[1].forEach((text) => {
                 texts.push(<TextSVG
                     id={text.id}
                     key={text.text}
@@ -145,7 +147,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
 
     return (
         <WorkspaceWrapper offset={offset+30} sheetWidth={sheetWidth} sheetHeight={sheetHeight}>
-            <TransformWrapper pan={drawing === 'curve' ? {disabled: true} : {disabled: false}}>
+            <TransformWrapper pan={drawing === 'curve' || drawing === 'pencil' ? {disabled: true} : {disabled: false}}>
                 <TransformComponent>
                     <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
                         {rects}
@@ -161,6 +163,8 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
                         {drawing === 'line' && <Line id={'line__'+drawings.lines.length}/>}
                     </Sheet>
                     {drawing === 'curve' && <Curve id={'curve__'+drawings.curves.length}/>}
+                    {drawing === 'pencil' && <Pencil/>}
+                    <Canvas id="canvas" sheetHeight={sheetHeight} sheetWidth={sheetWidth} drawing={drawing}/>
                 </TransformComponent>
             </TransformWrapper>
         </WorkspaceWrapper>

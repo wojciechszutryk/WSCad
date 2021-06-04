@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SheetStyles = styled.div`
   height: ${props => props.sheetHeight}px;
   width: ${props => props.sheetWidth}px;
-  background-color: ${({theme}) => theme.paper.normal};
+  background-color: transparent;
   cursor: ${props => props.cursorOverall};
   & svg{
     & *:hover{
@@ -16,6 +16,7 @@ export const SheetStyles = styled.div`
 export const WorkspaceWrapper = styled.div`
   position: absolute;
   width: ${props => Math.max(props.sheetWidth,props.sheetWidth)}px;
+  background-color: ${({theme}) => theme.paper.normal};
   top: 10px;
   bottom: 10px;
   left: ${props => props.offset}px;
