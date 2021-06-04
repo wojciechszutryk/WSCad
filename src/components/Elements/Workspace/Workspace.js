@@ -26,6 +26,7 @@ import Pencil from "../../drawElements/pencil";
 import {Canvas} from "../../drawElements/pencil/PencilStyles";
 import ImageSVG from "../../sheetElements/image/ImageSVG";
 import Image from "../../drawElements/image";
+import ImageInput from "../../drawElements/image/ImageInput";
 
 const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteImage, deleteLine, deleteCircle, deleteText, deleteRect, deleteCurve}) => {
     const lines = []
@@ -164,6 +165,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteIm
     })
 
     return (
+        <>
         <WorkspaceWrapper offset={offset+30} sheetWidth={sheetWidth} sheetHeight={sheetHeight}>
             <TransformWrapper pan={drawing === 'curve' || drawing === 'pencil' ? {disabled: true} : {disabled: false}}>
                 <TransformComponent>
@@ -188,6 +190,8 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteIm
                 </TransformComponent>
             </TransformWrapper>
         </WorkspaceWrapper>
+        {drawing === 'image' && <ImageInput offset={offset+30}/>}
+        </>
     );
 };
 

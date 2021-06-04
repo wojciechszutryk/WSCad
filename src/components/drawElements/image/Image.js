@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
 import ImageSVG from "../../sheetElements/image/ImageSVG";
 
-const Image = ({id, offset, sheetWidth, sheetHeight, drawing, setDrawing, addImage, href}) => {
+const Image = ({id, offset, sheetWidth, sheetHeight, drawing, setDrawing, addImage}) => {
     const offsetX = offset+30;
     const offsetY = 10;
     const cursorPosition = useMousePosition(offsetX,offsetY);
@@ -37,11 +37,12 @@ const Image = ({id, offset, sheetWidth, sheetHeight, drawing, setDrawing, addIma
                 image['width'] = Math.abs(pointsValue.current[0].x - pointsValue.current[1].x)
                 image['height'] = Math.abs(pointsValue.current[0].y - pointsValue.current[1].y)
                 image['id'] = id;
+                image['href'] = document.querySelector('input.form__field').value;
                 addImage(image);
                 setDrawing('');
             }
             if (e && e.code === 'Escape') return clean();
-            return finish();
+            else if (!e) return finish();
         }
         window.addEventListener("click", setFromEvent);
         window.addEventListener("keydown", stopDrawing);
@@ -62,7 +63,7 @@ const Image = ({id, offset, sheetWidth, sheetHeight, drawing, setDrawing, addIma
                 positionY = {Math.min(pointsPosition[0].y,pointsPosition[1].y)}
                 width = {Math.abs(pointsPosition[0].x - pointsPosition[1].x)}
                 height = {Math.abs(pointsPosition[0].y - pointsPosition[1].y)}
-                href={href}
+                href={document.querySelector('input.form__field').value}
             />)
     }
     else if (pointsPosition.length === 1) {
@@ -72,7 +73,7 @@ const Image = ({id, offset, sheetWidth, sheetHeight, drawing, setDrawing, addIma
                 positionY = {Math.min(pointsPosition[0].y, cursorPosition.y)}
                 width = {Math.abs(cursorPosition.x - pointsPosition[0].x)}
                 height = {Math.abs(cursorPosition.y - pointsPosition[0].y)}
-                href={href}
+                href={document.querySelector('input.form__field').value}
             />)
     }
 
