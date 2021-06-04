@@ -2,7 +2,7 @@ import {
     CIRCLE_ADD,
     CIRCLE_DELETE,
     CURVE_ADD,
-    CURVE_DELETE,
+    CURVE_DELETE, IMAGE_ADD, IMAGE_DELETE,
     LINE_ADD,
     LINE_DELETE,
     RECT_ADD,
@@ -15,6 +15,7 @@ const startElements = {
     rects: [],
     curves: [],
     texts: [],
+    images: [],
 }
 
 const elements = (state= startElements, action) => {
@@ -59,6 +60,14 @@ const elements = (state= startElements, action) => {
                     ...state.texts,
                 ]
             }
+        case IMAGE_ADD:
+            return {
+                ...state,
+                images: [
+                    action.payload,
+                    ...state.images,
+                ]
+            }
         case LINE_DELETE:
             return {
                 ...state,
@@ -83,6 +92,11 @@ const elements = (state= startElements, action) => {
             return {
                 ...state,
                 texts: state.texts.filter(text => text.id !== action.payload),
+            }
+        case IMAGE_DELETE:
+            return {
+                ...state,
+                images: state.images.filter(image => image.id !== action.payload),
             }
         default:
             return state;

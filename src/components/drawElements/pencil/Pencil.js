@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {connect} from "react-redux";
 import {addLine} from "../../../data/actions/drawingActions/drawingActions";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
+import {Canvas} from "./PencilStyles";
 
 const Pencil = ({color, lineWidth, offset, sheetWidth, sheetHeight, setDrawing}) => {
     const offsetX = offset+30;

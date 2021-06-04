@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import {WorkspaceWrapper} from "./WrokspaceStyles";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import PolyLine from "../../drawElements/polyLine";
@@ -9,7 +9,7 @@ import PolyLineSVG from "../../sheetElements/polyLine";
 import Sheet from "./Sheet";
 import {
     deleteCircle,
-    deleteCurve,
+    deleteCurve, deleteImage,
     deleteLine,
     deleteRect,
     deleteText
@@ -24,14 +24,17 @@ import Text from "../../drawElements/text";
 import TextSVG from "../../sheetElements/text";
 import Pencil from "../../drawElements/pencil";
 import {Canvas} from "../../drawElements/pencil/PencilStyles";
+import ImageSVG from "../../sheetElements/image/ImageSVG";
+import Image from "../../drawElements/image";
 
-const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLine, deleteCircle, deleteText, deleteRect, deleteCurve}) => {
+const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteImage, deleteLine, deleteCircle, deleteText, deleteRect, deleteCurve}) => {
     const lines = []
     const polyLines = []
     const circles = []
     const rects = []
     const curves = []
     const texts = []
+    const images = []
 
     const handleOnClick = (id, type) => {
         const onSelect = (id) => {
@@ -41,6 +44,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
             switch (type) {
                 case "circle": deleteCircle(id); break;
                 case "rect": deleteRect(id); break;
+                case "image": deleteImage(id); break;
                 case "curve": deleteCurve(id); break;
                 case "text": deleteText(id); break;
                 default: deleteLine(id); break;
@@ -101,6 +105,20 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
                 />)
             ))
         }
+        if (element[0] === 'images'){
+            return element[1].forEach((image) => (
+                images.push(<ImageSVG
+                    id={image.id}
+                    key={image.point.x*image.point.y}
+                    positionX = {image.point.x}
+                    positionY = {image.point.y}
+                    width ={image.width}
+                    height ={image.height}
+                    href ={image.href}
+                    onClick = {() => handleOnClick(image.id, 'image')}
+                />)
+            ))
+        }
         if (element[0] === 'polyLines'){
             return element[1].forEach((polyLine,index) => {
                 polyLines.push(<PolyLineSVG
@@ -150,12 +168,14 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteLi
             <TransformWrapper pan={drawing === 'curve' || drawing === 'pencil' ? {disabled: true} : {disabled: false}}>
                 <TransformComponent>
                     <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
+                        {images}
                         {rects}
                         {circles}
                         {texts}
                         {curves}
                         {polyLines}
                         {lines}
+                        {drawing === 'image' && <Image id={'image__'+drawings.images.length}/>}
                         {drawing === 'rect' && <Rect id={'rect__'+drawings.rects.length}/>}
                         {drawing === 'circle' && <Circle id={'circle__'+drawings.circles.length}/>}
                         {drawing === 'text' && <Text id={'text__'+drawings.texts.length}/>}
@@ -179,6 +199,7 @@ const ConnectedWorkspace = connect(state => ({
         sheetHeight: state.application.sheetHeight,
     }), {
         deleteLine,
+        deleteImage,
         deleteText,
         deleteCircle,
         deleteRect,

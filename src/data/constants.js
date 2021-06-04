@@ -3,11 +3,13 @@ export const CIRCLE_ADD = "CIRCLE_ADD";
 export const RECT_ADD = "RECT_ADD";
 export const CURVE_ADD = "CURVE_ADD";
 export const TEXT_ADD = "TEXT_ADD";
+export const IMAGE_ADD = "IMAGE_ADD";
 export const LINE_DELETE = "LINE_DELETE";
 export const CIRCLE_DELETE = "CIRCLE_DELETE";
 export const RECT_DELETE = "RECT_DELETE";
 export const CURVE_DELETE = "CURVE_DELETE";
 export const TEXT_DELETE = "TEXT_DELETE";
+export const IMAGE_DELETE = "IMAGE_DELETE";
 
 export const THEME_TOGGLE = "THEME_TOGGLE";
 export const SET_SHEET_WIDTH = "SET_SHEET_WIDTH";
