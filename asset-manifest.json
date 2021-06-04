@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/WSCad/static/css/main.7735e11a.chunk.css",
-    "main.js": "/WSCad/static/js/main.1cbcdd0f.chunk.js",
-    "main.js.map": "/WSCad/static/js/main.1cbcdd0f.chunk.js.map",
+    "main.js": "/WSCad/static/js/main.32bb7a91.chunk.js",
+    "main.js.map": "/WSCad/static/js/main.32bb7a91.chunk.js.map",
     "runtime-main.js": "/WSCad/static/js/runtime-main.b728dbb1.js",
     "runtime-main.js.map": "/WSCad/static/js/runtime-main.b728dbb1.js.map",
-    "static/js/2.1de6bb5c.chunk.js": "/WSCad/static/js/2.1de6bb5c.chunk.js",
-    "static/js/2.1de6bb5c.chunk.js.map": "/WSCad/static/js/2.1de6bb5c.chunk.js.map",
+    "static/js/2.7b5ede12.chunk.js": "/WSCad/static/js/2.7b5ede12.chunk.js",
+    "static/js/2.7b5ede12.chunk.js.map": "/WSCad/static/js/2.7b5ede12.chunk.js.map",
     "static/js/3.b7b7557c.chunk.js": "/WSCad/static/js/3.b7b7557c.chunk.js",
     "static/js/3.b7b7557c.chunk.js.map": "/WSCad/static/js/3.b7b7557c.chunk.js.map",
     "index.html": "/WSCad/index.html",
     "static/css/main.7735e11a.chunk.css.map": "/WSCad/static/css/main.7735e11a.chunk.css.map",
-    "static/js/2.1de6bb5c.chunk.js.LICENSE.txt": "/WSCad/static/js/2.1de6bb5c.chunk.js.LICENSE.txt"
+    "static/js/2.7b5ede12.chunk.js.LICENSE.txt": "/WSCad/static/js/2.7b5ede12.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b728dbb1.js",
-    "static/js/2.1de6bb5c.chunk.js",
+    "static/js/2.7b5ede12.chunk.js",
     "static/css/main.7735e11a.chunk.css",
-    "static/js/main.1cbcdd0f.chunk.js"
+    "static/js/main.32bb7a91.chunk.js"
   ]
 }
