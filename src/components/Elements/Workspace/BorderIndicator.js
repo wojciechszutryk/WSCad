@@ -44,14 +44,14 @@ const BorderIndicator = ({sheetWidth, sheetHeight, offset}) => {
     // smaller horizontal larger vertical
     else{
         verticalBorderIndicators = smallerArrayNumbers.map(number => (
-            <HorizontalBorderIndicatorElement key={number} width={15} height={sheetHeight/29}>
-                {number}
-            </HorizontalBorderIndicatorElement>
-        ))
-        horizontalBorderIndicators = largerArrayNumbers.map(number => (
-            <VerticalBorderIndicatorElement key={number} width={sheetWidth/21} height={15}>
+            <VerticalBorderIndicatorElement key={number} width={15} height={sheetHeight/21}>
                 {number}
             </VerticalBorderIndicatorElement>
+        ))
+        horizontalBorderIndicators = largerArrayNumbers.map(number => (
+            <HorizontalBorderIndicatorElement key={number} width={sheetWidth/21} height={15}>
+                {number}
+            </HorizontalBorderIndicatorElement>
         ))
     }
 

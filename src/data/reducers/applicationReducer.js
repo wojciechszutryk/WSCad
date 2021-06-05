@@ -1,4 +1,4 @@
-import {SET_DRAWING, SET_SHEET_HEIGHT, SET_SHEET_WIDTH, THEME_TOGGLE, TOGGLE_INDICATOR} from "../constants";
+import {SET_DRAWING, SET_SHEET_HEIGHT, SET_SHEET_WIDTH, THEME_TOGGLE, TOGGLE_INDICATOR, TOGGLE_ORIENTATION} from "../constants";
 
 const startState = {
     drawing: '',
@@ -7,6 +7,7 @@ const startState = {
     sheetOffset: Math.min(window.innerWidth*0.2, 200),
     sheetWidth: (window.innerHeight-20)/1.4142857,
     sheetHeight: (window.innerHeight-20),
+    sheetVertical: true,
 }
 
 const application = (state= startState, action) => {
@@ -39,6 +40,12 @@ const application = (state= startState, action) => {
             return {
                 ...state,
                 indicator: !state.indicator,
+            }
+
+        case TOGGLE_ORIENTATION:
+            return {
+                ...state,
+                sheetVertical: !state.sheetVertical,
             }
 
         default:
