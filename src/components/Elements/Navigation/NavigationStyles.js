@@ -11,21 +11,21 @@ export const NavigationWrapper = styled.section`
   transition: 0s;
   z-index: 10;
   &:nth-child(2){
-    top: calc(100% - 200px);
+    top: 432px;
     left: calc(100% - 150px);
     width: 100px;
     height: 50px;
   }
 
   &:nth-child(3){
-    top: calc(100% - 350px);
-    left: calc(100% - 250px);
-    width: 200px;
+    top: 314px;
+    left: calc(100% - 260px);
+    width: 210px;
     height: 50px;
   }
 
   &:nth-child(4){
-    top: calc(100% - 500px);
+    top: 200px;
     left: calc(100% - 260px);
     width: 210px;
     height: 50px;

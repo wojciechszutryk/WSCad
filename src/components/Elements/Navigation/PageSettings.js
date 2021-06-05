@@ -2,7 +2,7 @@ import React from 'react';
 import {ButtonsWrapper} from "./NavigationStyles";
 import {NormalButton, SetDarkButton, SetLightButton} from "../../styleComponents/ButtonStyles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faRulerCombined, faSync} from "@fortawesome/free-solid-svg-icons";
+import {faRulerCombined, faSync, faPrint, faDownload, faUpload} from "@fortawesome/free-solid-svg-icons";
 import {connect} from "react-redux";
 import {toggleIndicator, toggleOrientation, setSheetWidth} from "../../../data/actions/applicationActions/applicationActions";
 
@@ -26,6 +26,15 @@ const PageSettings = ({toggleIndicator, indicator, toggleOrientation, sheetVerti
             </NormalButton>
             <NormalButton>
                 <FontAwesomeIcon icon={faSync} onClick={handleToggleSheet} className={'innerIcon'}/>
+            </NormalButton>
+            <NormalButton>
+                <FontAwesomeIcon icon={faDownload} onClick={handleToggleSheet} className={'innerIcon'}/>
+            </NormalButton>
+            <NormalButton>
+                <FontAwesomeIcon icon={faUpload} onClick={handleToggleSheet} className={'innerIcon'}/>
+            </NormalButton>
+            <NormalButton>
+                <FontAwesomeIcon icon={faPrint} onClick={handleToggleSheet} className={'innerIcon'}/>
             </NormalButton>
         </ButtonsWrapper>
         
