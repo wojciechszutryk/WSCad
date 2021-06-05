@@ -13,18 +13,19 @@ export const darkTheme = {
     },
     color: {
         normal: 'rgb(104,49,157)',
-        dark: 'rgb(89,41,131)'
+        dark: 'rgb(89,41,131)',
     },
     icon: {
         normal: 'rgb(42,11,57)',
         hover: 'rgb(0,0,0)'
     },
     font: {
-        normal: 'rgb(222,168,255)'
+        normal: 'rgb(222,168,255)',
+        dark: 'rgb(68,30,95)',
     },
     paper: {
         normal: 'rgb(255,255,255)',
-        hover: 'rgb(222,168,255)'
+        hover: 'rgb(165,150,255)'
     }
 };
 
@@ -43,14 +44,15 @@ export const lightTheme = {
     },
     color: {
         normal: 'rgb(252, 110, 81)',
-        dark: 'rgb(235, 93, 64)'
+        dark: 'rgb(235, 93, 64)',
     },
     icon: {
         normal: 'rgb(74,67,67)',
         hover: 'rgb(41,37,37)'
     },
     font: {
-        normal: 'rgb(74,67,67)'
+        normal: 'rgb(74,67,67)',
+        dark: 'rgb(103,35,22)',
     },
     paper: {
         normal: 'rgb(255,255,255)',

@@ -7,9 +7,9 @@ export const ImageInputStyled = styled.div`
     margin-left: 10px;
     margin-right: 10px;
     width: ${props => props.offset-20}px;
+    font-family: sans-serif;
 
   & .form__field {
-    font-family: inherit;
     width: 100%;
     border: 0;
     border-bottom: 2px solid ${({theme}) => theme.font.normal};
@@ -19,6 +19,8 @@ export const ImageInputStyled = styled.div`
     padding: 7px 0;
     background: transparent;
     transition: border-color 0.2s;
+    border-image: linear-gradient(to right, ${({theme}) => theme.border.normalHover},${({theme}) => theme.border.normal});
+    border-image-slice: 1;
 
     &::placeholder {
       color: transparent;
@@ -37,7 +39,7 @@ export const ImageInputStyled = styled.div`
     display: block;
     transition: 0.2s;
     font-size: 1rem;
-    color: ${({theme}) => theme.font.normal};
+    color: ${({theme}) => theme.border.normalHover};
   }
 
   & .form__field:focus {
@@ -53,8 +55,6 @@ export const ImageInputStyled = styled.div`
     padding-bottom: 6px;
     font-weight: 700;
     border-width: 3px;
-    border-image: linear-gradient(to right, ${({theme}) => theme.border.normalHover},${({theme}) => theme.border.normal});
-    border-image-slice: 1;
   }
 
   & .form__field{

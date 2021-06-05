@@ -27,8 +27,11 @@ import {Canvas} from "../../drawElements/pencil/PencilStyles";
 import ImageSVG from "../../sheetElements/image/ImageSVG";
 import Image from "../../drawElements/image";
 import ImageInput from "../../drawElements/image/ImageInput";
+import BorderIndicator from "./BorderIndicator";
 
-const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteImage, deleteLine, deleteCircle, deleteText, deleteRect, deleteCurve}) => {
+const Workspace = ({drawing, drawings, indicator,
+                       offset, sheetWidth, sheetHeight,
+                       deleteImage, deleteLine, deleteCircle, deleteText, deleteRect, deleteCurve}) => {
     const lines = []
     const polyLines = []
     const circles = []
@@ -167,7 +170,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteIm
     return (
         <>
         <WorkspaceWrapper offset={offset+30} sheetWidth={sheetWidth} sheetHeight={sheetHeight}>
-            <TransformWrapper pan={drawing === 'curve' || drawing === 'pencil' ? {disabled: true} : {disabled: false}}>
+            <TransformWrapper pan={(drawing === 'curve' || drawing === 'pencil') ? {disabled: true} : {disabled: false}}>
                 <TransformComponent>
                     <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
                         {images}
@@ -191,6 +194,7 @@ const Workspace = ({drawing, drawings, offset, sheetWidth, sheetHeight, deleteIm
             </TransformWrapper>
         </WorkspaceWrapper>
         {drawing === 'image' && <ImageInput offset={offset+30}/>}
+        {indicator && <BorderIndicator/>}
         </>
     );
 };
@@ -201,6 +205,7 @@ const ConnectedWorkspace = connect(state => ({
         offset: state.application.sheetOffset,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
+        indicator: state.application.indicator,
     }), {
         deleteLine,
         deleteImage,

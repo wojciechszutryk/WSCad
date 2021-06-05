@@ -9,7 +9,7 @@ export const NavigationWrapper = styled.section`
   background-color: ${({theme}) => theme.background.dark};
   border: 3px solid ${({theme}) => theme.border.normal};
   transition: 0s;
-  
+  z-index: 10;
   &:nth-child(2){
     top: calc(100% - 200px);
     left: calc(100% - 150px);
@@ -111,7 +111,7 @@ export const Minimizer = styled.button`
   right: 0;
   height: 20px;
   width: 20px;
-  z-index: 1;
+  z-index: 10;
   cursor: pointer;
   background-color: ${({theme}) => theme.border.normal};
   color: ${({theme}) => theme.icon.normal};

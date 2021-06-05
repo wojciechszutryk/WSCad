@@ -1,4 +1,4 @@
-import {SET_DRAWING, SET_SHEET_HEIGHT, SET_SHEET_WIDTH, THEME_TOGGLE} from "../../constants";
+import {SET_DRAWING, SET_SHEET_HEIGHT, SET_SHEET_WIDTH, THEME_TOGGLE, TOGGLE_INDICATOR} from "../../constants";
 
 export const setDrawing = element => {
     return{
@@ -24,5 +24,11 @@ export const setSheetHeight = height => {
     return{
         type: SET_SHEET_HEIGHT,
         payload: height
+    }
+};
+
+export const toggleIndicator = () => {
+    return{
+        type: TOGGLE_INDICATOR,
     }
 };

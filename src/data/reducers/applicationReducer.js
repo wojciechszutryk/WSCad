@@ -1,8 +1,9 @@
-import {SET_DRAWING, SET_SHEET_HEIGHT, SET_SHEET_WIDTH, THEME_TOGGLE} from "../constants";
+import {SET_DRAWING, SET_SHEET_HEIGHT, SET_SHEET_WIDTH, THEME_TOGGLE, TOGGLE_INDICATOR} from "../constants";
 
 const startState = {
     drawing: '',
     darkTheme: true,
+    indicator: true,
     sheetOffset: Math.min(window.innerWidth*0.2, 200),
     sheetWidth: (window.innerHeight-20)/1.4142857,
     sheetHeight: (window.innerHeight-20),
@@ -32,6 +33,12 @@ const application = (state= startState, action) => {
             return {
                 ...state,
                 sheetHeight: action.payload,
+            }
+
+        case TOGGLE_INDICATOR:
+            return {
+                ...state,
+                indicator: !state.indicator,
             }
 
         default:
