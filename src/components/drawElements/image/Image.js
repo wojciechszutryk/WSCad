@@ -32,13 +32,15 @@ const Image = ({id, offset, sheetWidth, sheetHeight, drawing, setDrawing, addIma
             const finish = () => {
                 window.removeEventListener("click", setFromEvent);
                 window.removeEventListener("keydown", stopDrawing);
-                const image = {};
-                image['point'] = {x: Math.min(pointsValue.current[0].x,pointsValue.current[1].x), y:Math.min(pointsValue.current[0].y,pointsValue.current[1].y)};
-                image['width'] = Math.abs(pointsValue.current[0].x - pointsValue.current[1].x)
-                image['height'] = Math.abs(pointsValue.current[0].y - pointsValue.current[1].y)
-                image['id'] = id;
-                image['href'] = document.querySelector('input.form__field').value;
-                addImage(image);
+                if (document.querySelector('input.form__field').value){
+                    const image = {};
+                    image['point'] = {x: Math.min(pointsValue.current[0].x,pointsValue.current[1].x), y:Math.min(pointsValue.current[0].y,pointsValue.current[1].y)};
+                    image['width'] = Math.abs(pointsValue.current[0].x - pointsValue.current[1].x)
+                    image['height'] = Math.abs(pointsValue.current[0].y - pointsValue.current[1].y)
+                    image['id'] = id;
+                    image['href'] = document.querySelector('input.form__field').value;
+                    addImage(image);
+                }
                 setDrawing('');
             }
             if (e && e.code === 'Escape') return clean();
