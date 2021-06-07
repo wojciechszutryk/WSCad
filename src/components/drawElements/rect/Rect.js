@@ -5,9 +5,7 @@ import {connect} from "react-redux";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
 import RectSVG from "../../sheetElements/rect";
 
-const Rect = ({id, color, pattern, lineWidth, fillColor, rects, addRect, offset, sheetWidth, sheetHeight, drawing, setDrawing}) => {
-    const offsetX = offset+30;
-    const offsetY = 10;
+const Rect = ({id, color, pattern, lineWidth, fillColor, rects, addRect, offsetX, offsetY, sheetWidth, sheetHeight, drawing, setDrawing}) => {
     const cursorPosition = useMousePosition(offsetX,offsetY);
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
@@ -52,7 +50,7 @@ const Rect = ({id, color, pattern, lineWidth, fillColor, rects, addRect, offset,
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", stopDrawing);
         };
-    }, [id, setDrawing, addRect, color, fillColor, lineWidth, rects.length, offsetX, pattern, sheetHeight, sheetWidth]);
+    }, [id, setDrawing, addRect, color, fillColor, lineWidth, rects.length, offsetX, pattern, sheetHeight, sheetWidth, offsetY]);
 
     let rectToDraw = null;
     if (drawing === '') rectToDraw = null;
@@ -90,7 +88,8 @@ const Rect = ({id, color, pattern, lineWidth, fillColor, rects, addRect, offset,
 
 const ConnectedRect = connect(state => ({
         drawing: state.application.drawing,
-        offset: state.application.sheetOffset,
+        offsetX: state.application.sheetOffsetX,
+        offsetY: state.application.sheetOffsetY,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
         rects: state.elements.rects,

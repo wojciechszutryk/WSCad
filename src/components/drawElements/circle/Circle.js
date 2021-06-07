@@ -1,13 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useMousePosition} from "../../../hooks/useMousePosition";
-import {addCircle, addLine} from "../../../data/actions/drawingActions/drawingActions";
+import {addCircle} from "../../../data/actions/drawingActions/drawingActions";
 import {connect} from "react-redux";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
 import CircleSVG from "../../sheetElements/circle";
 
-const Circle = ({id, color, pattern, lineWidth, fillColor, circles, addCircle, offset, sheetWidth, sheetHeight, drawing, setDrawing}) => {
-    const offsetX = offset+30;
-    const offsetY = 10;
+const Circle = ({id, color, pattern, lineWidth, fillColor, circles, addCircle, offsetX, offsetY, sheetWidth, sheetHeight, drawing, setDrawing}) => {
     const cursorPosition = useMousePosition(offsetX,offsetY);
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
@@ -51,7 +49,7 @@ const Circle = ({id, color, pattern, lineWidth, fillColor, circles, addCircle, o
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", stopDrawing);
         };
-    }, [id, setDrawing, addCircle, color, fillColor, lineWidth, circles.length, offsetX, pattern, sheetHeight, sheetWidth]);
+    }, [id, setDrawing, addCircle, color, fillColor, lineWidth, circles.length, offsetX, pattern, sheetHeight, sheetWidth, offsetY]);
 
     let circleToDraw = null;
     if (drawing === '') circleToDraw = null;
@@ -87,7 +85,8 @@ const Circle = ({id, color, pattern, lineWidth, fillColor, circles, addCircle, o
 
 const ConnectedCircle = connect(state => ({
         drawing: state.application.drawing,
-        offset: state.application.sheetOffset,
+        offsetX: state.application.sheetOffsetX,
+        offsetY: state.application.sheetOffsetY,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
         circles: state.elements.circles,

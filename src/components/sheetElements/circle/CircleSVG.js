@@ -15,7 +15,7 @@ const CircleSVG = ({id,
         strokeWidth: lineWidth,
         strokeDasharray: linePattern,
         fill: fillColor,
-    }), [color, lineWidth, linePattern]);
+    }), [color, lineWidth, linePattern, fillColor]);
 
     return (
         <circle

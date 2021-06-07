@@ -168,34 +168,34 @@ const Workspace = ({drawing, drawings, indicator,
     })
 
     return (
-        <>
-        <WorkspaceWrapper offsetX={offsetX} offsetY={offsetY} sheetWidth={sheetWidth} sheetHeight={sheetHeight}  id='sheet'>
-            <TransformWrapper pan={(drawing === 'curve' || drawing === 'pencil') ? {disabled: true} : {disabled: false}}>
-                <TransformComponent>
-                    <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
-                        {images}
-                        {rects}
-                        {circles}
-                        {texts}
-                        {curves}
-                        {polyLines}
-                        {lines}
-                        {drawing === 'image' && <Image id={'image__'+drawings.images.length}/>}
-                        {drawing === 'rect' && <Rect id={'rect__'+drawings.rects.length}/>}
-                        {drawing === 'circle' && <Circle id={'circle__'+drawings.circles.length}/>}
-                        {drawing === 'text' && <Text id={'text__'+drawings.texts.length}/>}
-                        {drawing === 'polyLine' && <PolyLine id={'line__'+drawings.lines.length}/>}
-                        {drawing === 'line' && <Line id={'line__'+drawings.lines.length}/>}
-                    </Sheet>
-                    {drawing === 'curve' && <Curve id={'curve__'+drawings.curves.length}/>}
-                    {drawing === 'pencil' && <Pencil/>}
-                    <Canvas id="canvas" sheetHeight={sheetHeight} sheetWidth={sheetWidth} drawing={drawing}/>
-                </TransformComponent>
-            </TransformWrapper>
-        </WorkspaceWrapper>
-        {drawing === 'image' && <ImageInput offsetX={offsetX} offsetY={offsetY}/>}
-        {indicator && <BorderIndicator/>}
-        </>
+        <div id='sheet'>
+            <WorkspaceWrapper offsetX={offsetX} offsetY={offsetY} sheetWidth={sheetWidth} sheetHeight={sheetHeight}>
+                <TransformWrapper pan={(drawing === 'curve' || drawing === 'pencil') ? {disabled: true} : {disabled: false}}>
+                    <TransformComponent>
+                        <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
+                            {images}
+                            {rects}
+                            {circles}
+                            {texts}
+                            {curves}
+                            {polyLines}
+                            {lines}
+                            {drawing === 'image' && <Image id={'image__'+drawings.images.length}/>}
+                            {drawing === 'rect' && <Rect id={'rect__'+drawings.rects.length}/>}
+                            {drawing === 'circle' && <Circle id={'circle__'+drawings.circles.length}/>}
+                            {drawing === 'text' && <Text id={'text__'+drawings.texts.length}/>}
+                            {drawing === 'polyLine' && <PolyLine id={'line__'+drawings.lines.length}/>}
+                            {drawing === 'line' && <Line id={'line__'+drawings.lines.length}/>}
+                        </Sheet>
+                        {drawing === 'curve' && <Curve id={'curve__'+drawings.curves.length}/>}
+                        {drawing === 'pencil' && <Pencil/>}
+                        <Canvas id="canvas" sheetHeight={sheetHeight} sheetWidth={sheetWidth} drawing={drawing}/>
+                    </TransformComponent>
+                </TransformWrapper>
+            </WorkspaceWrapper>
+            {drawing === 'image' && <ImageInput offsetX={offsetX} offsetY={offsetY}/>}
+            {indicator && <BorderIndicator/>}
+        </div>
     );
 };
 

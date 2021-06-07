@@ -5,9 +5,7 @@ import {addLine} from "../../../data/actions/drawingActions/drawingActions";
 import {connect} from "react-redux";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
 
-const Line = ({id, color, pattern, lineWidth, lines, addLine, offset, sheetWidth, sheetHeight, drawing, setDrawing}) => {
-    const offsetX = offset+30;
-    const offsetY = 10;
+const Line = ({id, color, pattern, lineWidth, lines, addLine, offsetX, offsetY, sheetWidth, sheetHeight, drawing, setDrawing}) => {
     const cursorPosition = useMousePosition(offsetX,offsetY);
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
@@ -50,7 +48,7 @@ const Line = ({id, color, pattern, lineWidth, lines, addLine, offset, sheetWidth
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", stopDrawing);
         };
-    }, [id, setDrawing, addLine, color, lineWidth, lines.length, offsetX, pattern, sheetHeight, sheetWidth]);
+    }, [id, setDrawing, addLine, color, lineWidth, lines.length, offsetX, pattern, sheetHeight, sheetWidth, offsetY]);
 
     let lineToDraw = null;
     if (drawing === '') lineToDraw = null;
@@ -82,7 +80,8 @@ const Line = ({id, color, pattern, lineWidth, lines, addLine, offset, sheetWidth
 
 const ConnectedLine = connect(state => ({
         drawing: state.application.drawing,
-        offset: state.application.sheetOffset,
+        offsetX: state.application.sheetOffsetX,
+        offsetY: state.application.sheetOffsetY,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
         lines: state.elements.lines,

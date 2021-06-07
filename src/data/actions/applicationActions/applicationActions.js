@@ -1,6 +1,6 @@
 import {
     SET_DRAWING,
-    SET_SHEET_HEIGHT,
+    SET_SHEET_HEIGHT, SET_SHEET_OFFSET_X,
     SET_SHEET_OFFSET_Y,
     SET_SHEET_WIDTH,
     THEME_TOGGLE,
@@ -42,9 +42,17 @@ export const setSheetOffsetY = offset => {
     }
 };
 
-export const toggleIndicator = () => {
+export const setSheetOffsetX = offset => {
+    return{
+        type: SET_SHEET_OFFSET_X,
+        payload: offset
+    }
+};
+
+export const setIndicator = (indicator) => {
     return{
         type: TOGGLE_INDICATOR,
+        payload: indicator
     }
 };
 

@@ -5,7 +5,8 @@ export const StyledLogo = styled.div`
   top: 5px;
   left: 15px;
   opacity: 0.5;
-  font-size: ${props => (props.width)/3}px;
+  max-width: 230px;
+  font-size: ${props => (props.width)/3 > 73 ? 73 : (props.width)/3}px;
   width: ${props => props.width}px;
   & span:first-child{
     color: ${({theme}) => theme.color.normal};

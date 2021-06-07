@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 const Logo = ({width}) => {
     return (
-        <StyledLogo width={width}>
+        <StyledLogo width={width-30}>
             <span>WS</span>
             <span>Cad</span>
         </StyledLogo>
@@ -12,7 +12,7 @@ const Logo = ({width}) => {
 };
 
 const ConnectedLogo = connect(state => ({
-        width: state.application.sheetOffset,
+        width: state.application.sheetOffsetX,
     }),null
 )(Logo);
 

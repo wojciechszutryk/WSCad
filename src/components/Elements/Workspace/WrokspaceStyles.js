@@ -15,10 +15,10 @@ export const SheetStyles = styled.div`
 
 export const WorkspaceWrapper = styled.div`
   position: absolute;
-  width: ${props => Math.max(props.sheetWidth,props.sheetWidth)}px;
+  width: ${props => props.sheetWidth}px;
+  height: ${props => props.sheetHeight}px;
   background-color: ${({theme}) => theme.paper.normal};
   top: ${props => props.offsetY}px;
-  bottom: 10px;
   left: ${props => props.offsetX}px;
 `;
 

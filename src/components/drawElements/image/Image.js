@@ -1,13 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useMousePosition} from "../../../hooks/useMousePosition";
-import {addImage, addRect} from "../../../data/actions/drawingActions/drawingActions";
+import {addImage} from "../../../data/actions/drawingActions/drawingActions";
 import {connect} from "react-redux";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
 import ImageSVG from "../../sheetElements/image/ImageSVG";
 
-const Image = ({id, offset, sheetWidth, sheetHeight, drawing, setDrawing, addImage}) => {
-    const offsetX = offset+30;
-    const offsetY = 10;
+const Image = ({id, offsetX, offsetY, sheetWidth, sheetHeight, drawing, setDrawing, addImage}) => {
     const cursorPosition = useMousePosition(offsetX,offsetY);
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
@@ -54,7 +52,7 @@ const Image = ({id, offset, sheetWidth, sheetHeight, drawing, setDrawing, addIma
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", stopDrawing);
         };
-    }, [setDrawing, addRect, offsetX, sheetHeight, sheetWidth]);
+    }, [setDrawing, offsetX, sheetHeight, sheetWidth, offsetY, id, addImage]);
 
     let imageToDraw = null;
     if (drawing === '') imageToDraw = null;
@@ -86,7 +84,8 @@ const Image = ({id, offset, sheetWidth, sheetHeight, drawing, setDrawing, addIma
 
 const ConnectedImage = connect(state => ({
         drawing: state.application.drawing,
-        offset: state.application.sheetOffset,
+        offsetX: state.application.sheetOffsetX,
+        offsetY: state.application.sheetOffsetY,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
     }),

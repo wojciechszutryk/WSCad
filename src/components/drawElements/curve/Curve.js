@@ -124,7 +124,7 @@ const Curve = ({id, color, pattern, lineWidth, fillColor, curves, addCurve, shee
             window.removeEventListener("keydown", stopDrawing);
             document.removeEventListener("mousemove", handleCurve);
         };
-    }, [id, setDrawing, addCurve, color, fillColor, lineWidth, curves.length]);
+    }, [id, setDrawing, addCurve, color, fillColor, lineWidth, curves.length, pattern]);
 
     return (
         <StyledCurve
@@ -156,7 +156,6 @@ const Curve = ({id, color, pattern, lineWidth, fillColor, curves, addCurve, shee
 
 const ConnectedCurve = connect(state => ({
         drawing: state.application.drawing,
-        offset: state.application.sheetOffset,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
         curves: state.elements.curves,

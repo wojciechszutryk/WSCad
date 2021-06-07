@@ -1,12 +1,9 @@
-import React, {useEffect, useRef} from 'react';
+import {useEffect} from 'react';
 import {connect} from "react-redux";
 import {addLine} from "../../../data/actions/drawingActions/drawingActions";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
-import {Canvas} from "./PencilStyles";
 
-const Pencil = ({color, lineWidth, offset, sheetWidth, sheetHeight, setDrawing}) => {
-    const offsetX = offset+30;
-    const offsetY = 10;
+const Pencil = ({color, lineWidth, offsetX, offsetY, sheetWidth, sheetHeight, setDrawing}) => {
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
     let coord = { x: 0, y: 0 };
@@ -58,7 +55,8 @@ const Pencil = ({color, lineWidth, offset, sheetWidth, sheetHeight, setDrawing})
 
 const ConnectedPencil = connect(state => ({
         drawing: state.application.drawing,
-        offset: state.application.sheetOffset,
+        offsetX: state.application.sheetOffsetX,
+        offsetY: state.application.sheetOffsetY,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
         lines: state.elements.lines,

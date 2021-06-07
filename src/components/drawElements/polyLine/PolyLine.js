@@ -5,9 +5,7 @@ import {connect} from "react-redux";
 import {addLine} from "../../../data/actions/drawingActions/drawingActions";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
 
-const PolyLine = ({id, color, pattern, lineWidth, addLine, offset, sheetWidth, sheetHeight, setDrawing, polyLines}) => {
-    const offsetX = offset+30;
-    const offsetY = 10;
+const PolyLine = ({id, color, pattern, lineWidth, addLine, offsetX, offsetY, sheetWidth, sheetHeight, setDrawing, polyLines}) => {
     const cursorPosition = useMousePosition(offsetX,offsetY);
     const pointsValue = useRef([]);
     const [pointsPosition, setPointsPosition] = useState([]);
@@ -45,7 +43,7 @@ const PolyLine = ({id, color, pattern, lineWidth, addLine, offset, sheetWidth, s
             window.removeEventListener("keydown", stopDrawing);
             setDrawing('');
         };
-    }, [id, setDrawing, addLine, color, lineWidth, offsetX, pattern, sheetHeight, sheetWidth]);
+    }, [id, setDrawing, addLine, color, lineWidth, offsetX, pattern, sheetHeight, sheetWidth, offsetY]);
 
     const linesToDraw = pointsPosition.map((point, index) => {
         if (pointsValue.current.length === 1 || index === pointsPosition.length - 1) {
@@ -87,7 +85,8 @@ const PolyLine = ({id, color, pattern, lineWidth, addLine, offset, sheetWidth, s
 
 const ConnectedPolyLine = connect(state => ({
     polyLines: state.elements.polyLines,
-    offset: state.application.sheetOffset,
+    offsetX: state.application.sheetOffsetX,
+    offsetY: state.application.sheetOffsetY,
     sheetWidth: state.application.sheetWidth,
     sheetHeight: state.application.sheetHeight,
     color: state.style.color,

@@ -5,12 +5,10 @@ import {connect} from "react-redux";
 import {setDrawing} from "../../../data/actions/applicationActions/applicationActions";
 import TextSVG from "../../sheetElements/text";
 
-const Text = ({id, color, fontSize, lineWidth, texts, addText, offset, sheetWidth, sheetHeight, drawing, setDrawing}) => {
-    const offsetX = offset+30;
-    const offsetY = 10;
+const Text = ({id, color, fontSize, lineWidth, texts, addText, offsetX, offsetY, sheetWidth, sheetHeight, drawing, setDrawing}) => {
     const pointsValue = useRef([]);
     const textToWrite = useRef('');
-    const [textState, setTextState] = useState('');
+    const [, setTextState] = useState('');
     const [pointPosition, setPointPosition] = useState([]);
     const cursorPosition = useMousePosition(offsetX,offsetY);
 
@@ -46,7 +44,7 @@ const Text = ({id, color, fontSize, lineWidth, texts, addText, offset, sheetWidt
                 textToWrite.current = text;
                 setTextState(text);
             }
-            if (e && e.code === 'Escape' || e.code === 'Enter') return finish();
+            if ((e && e.code === 'Escape') || e.code === 'Enter') return finish();
             else if (e && e.code) return setText(e);
         }
         window.addEventListener("click", setFromEvent);
@@ -57,7 +55,7 @@ const Text = ({id, color, fontSize, lineWidth, texts, addText, offset, sheetWidt
             window.removeEventListener("click", setFromEvent);
             window.removeEventListener("keydown", handleKeyInput);
         };
-    }, [id, setDrawing, addText, color, lineWidth, fontSize, texts.length, offsetX, sheetHeight, sheetWidth]);
+    }, [id, setDrawing, addText, color, lineWidth, fontSize, texts.length, offsetX, sheetHeight, sheetWidth, offsetY]);
 
     let textToDraw = null;
     if (drawing === '') textToDraw = null;
@@ -89,7 +87,8 @@ const Text = ({id, color, fontSize, lineWidth, texts, addText, offset, sheetWidt
 
 const ConnectedText = connect(state => ({
         drawing: state.application.drawing,
-        offset: state.application.sheetOffset,
+        offsetX: state.application.sheetOffsetX,
+        offsetY: state.application.sheetOffsetY,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
         texts: state.elements.texts,

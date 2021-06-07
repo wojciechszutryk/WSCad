@@ -1,6 +1,6 @@
 import {
     SET_DRAWING,
-    SET_SHEET_HEIGHT,
+    SET_SHEET_HEIGHT, SET_SHEET_OFFSET_X,
     SET_SHEET_OFFSET_Y,
     SET_SHEET_WIDTH,
     THEME_TOGGLE,
@@ -12,7 +12,7 @@ const startState = {
     drawing: '',
     darkTheme: true,
     indicator: true,
-    sheetOffsetX: Math.min(window.innerWidth*0.2+30, 230),
+    sheetOffsetX: (window.innerWidth-(window.innerHeight-20)/1.4142857)/2,
     sheetOffsetY: 10,
     sheetWidth: (window.innerHeight-20)/1.4142857,
     sheetHeight: (window.innerHeight-20),
@@ -51,10 +51,16 @@ const application = (state= startState, action) => {
                 sheetOffsetY: action.payload,
             }
 
+        case SET_SHEET_OFFSET_X:
+            return {
+                ...state,
+                sheetOffsetX: action.payload,
+            }
+
         case TOGGLE_INDICATOR:
             return {
                 ...state,
-                indicator: !state.indicator,
+                indicator: action.payload,
             }
 
         case TOGGLE_ORIENTATION:

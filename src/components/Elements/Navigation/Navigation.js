@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dragger, Minimizer, NavigationWrapper} from "./NavigationStyles";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faDraftingCompass, faCompress, faCog, faPalette} from '@fortawesome/free-solid-svg-icons'
