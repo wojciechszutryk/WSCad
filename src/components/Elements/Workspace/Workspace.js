@@ -168,6 +168,7 @@ const Workspace = ({drawing, drawings, indicator,
     })
 
     return (
+        <>
         <div id='sheet'>
             <WorkspaceWrapper offsetX={offsetX} offsetY={offsetY} sheetWidth={sheetWidth} sheetHeight={sheetHeight}>
                 <TransformWrapper pan={(drawing === 'curve' || drawing === 'pencil') ? {disabled: true} : {disabled: false}}>
@@ -194,8 +195,9 @@ const Workspace = ({drawing, drawings, indicator,
                 </TransformWrapper>
             </WorkspaceWrapper>
             {drawing === 'image' && <ImageInput offsetX={offsetX} offsetY={offsetY}/>}
-            {indicator && <BorderIndicator/>}
         </div>
+        {indicator && <BorderIndicator/>}
+    </>
     );
 };
 

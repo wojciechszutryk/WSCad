@@ -40,9 +40,6 @@ const PageSettings = ({setIndicator, indicator, toggleOrientation, sheetVertical
     }
 
     const handlePrintSheet = () => {
-        const indicatorState = indicator;
-        setIndicator(false)
-        console.log(indicator)
         const prtContent = document.getElementById("sheet");
         const WinPrint = window.open('', 'PRINT', `left=${offsetX},top=${offsetY},width=${sheetWidth},height=${sheetHeight},toolbar=0,scrollbars=0,status=0`);
         WinPrint.document.write('<html><head><title>' + document.title  + '</title>');
@@ -52,7 +49,6 @@ const PageSettings = ({setIndicator, indicator, toggleOrientation, sheetVertical
         WinPrint.document.close();
         WinPrint.focus();
         WinPrint.print();
-        setIndicator(indicatorState);
     }
 
     return (
