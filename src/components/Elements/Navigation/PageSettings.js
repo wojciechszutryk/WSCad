@@ -10,8 +10,20 @@ import {
     setSheetWidth,
     setSheetHeight, setSheetOffsetY, setSheetOffsetX
 } from "../../../data/actions/applicationActions/applicationActions";
+import { save } from 'save-file';
+import {
+    addCircle,
+    addCurve,
+    addImage,
+    addLine,
+    addRect,
+    addText
+} from "../../../data/actions/drawingActions/drawingActions";
 
-const PageSettings = ({setIndicator, indicator, toggleOrientation, sheetVertical, setSheetWidth, setSheetHeight, offsetX, offsetY, setSheetOffsetY, setSheetOffsetX, sheetWidth, sheetHeight}) => {
+const PageSettings = ({setIndicator, indicator,
+                    toggleOrientation, sheetVertical, setSheetWidth, setSheetHeight, offsetX, offsetY, setSheetOffsetY, setSheetOffsetX, sheetWidth, sheetHeight,
+                    addCircle, addRect, addLine, addCurve, addText, addImage, drawings,
+                    }) => {
 
     const handleToggleSheet = () => {
         if (sheetVertical) {
@@ -49,6 +61,16 @@ const PageSettings = ({setIndicator, indicator, toggleOrientation, sheetVertical
         WinPrint.document.close();
         WinPrint.focus();
         WinPrint.print();
+    };
+
+    const handleSaveFile = () => {
+        const date = new Date();
+        save(JSON.stringify(drawings), 'WSCad_'+date.toLocaleDateString()+'.json');
+    }
+
+    const handleLoadFile = () => {
+        const date = new Date();
+        save(JSON.stringify(drawings), 'WSCad_'+date.toLocaleDateString()+'.json');
     }
 
     return (
@@ -60,7 +82,7 @@ const PageSettings = ({setIndicator, indicator, toggleOrientation, sheetVertical
                 <FontAwesomeIcon icon={faSync} onClick={handleToggleSheet} className={'innerIcon'}/>
             </NormalButton>
             <NormalButton>
-                <FontAwesomeIcon icon={faDownload} onClick={handleToggleSheet} className={'innerIcon'}/>
+                <FontAwesomeIcon icon={faDownload} onClick={handleSaveFile} className={'innerIcon'}/>
             </NormalButton>
             <NormalButton>
                 <FontAwesomeIcon icon={faUpload} onClick={handleToggleSheet} className={'innerIcon'}/>
@@ -69,7 +91,6 @@ const PageSettings = ({setIndicator, indicator, toggleOrientation, sheetVertical
                 <FontAwesomeIcon icon={faPrint} onClick={handlePrintSheet} className={'innerIcon'}/>
             </NormalButton>
         </ButtonsWrapper>
-        
     );
 };
 
@@ -80,6 +101,7 @@ const ConnectedPageSettings = connect(state => ({
         sheetHeight: state.application.sheetHeight,
         indicator: state.application.indicator,
         sheetVertical: state.application.sheetVertical,
+        drawings: state.elements,
     }),
     {
         setIndicator,
@@ -88,6 +110,12 @@ const ConnectedPageSettings = connect(state => ({
         setSheetWidth,
         setSheetHeight,
         toggleOrientation,
+        addCircle,
+        addRect,
+        addLine,
+        addCurve,
+        addText,
+        addImage,
     }
 )(PageSettings);
 
