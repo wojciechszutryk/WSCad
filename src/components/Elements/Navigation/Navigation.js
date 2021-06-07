@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Dragger, Minimizer, NavigationWrapper} from "./NavigationStyles";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faDraftingCompass, faCompress, faCog, faPalette} from '@fortawesome/free-solid-svg-icons'
@@ -46,14 +46,7 @@ function dragElement(elem) {
 }
 
 const Navigation = () => {
-    const [minimized, setMinimized] = useState([false, false, false, false]);
-
-    useEffect(() => {
-        dragElement(document.getElementById("navigation1"));
-        dragElement(document.getElementById("navigation2"));
-        dragElement(document.getElementById("navigation3"));
-        dragElement(document.getElementById("navigation4"));
-    },[])
+    const [minimized, setMinimized] = useState([true, true, true, false]);
 
     const toggleMinimized = (name) => {
         const menu = document.getElementById(name);
@@ -66,44 +59,63 @@ const Navigation = () => {
         setTimeout(function(){ menu.style.transition = '0s'; }, 500);
     }
 
+    useEffect(() => {
+        const navigation1 = document.getElementById("navigation1");
+        const navigation2 = document.getElementById("navigation2");
+        const navigation3 = document.getElementById("navigation3");
+        const navigation4 = document.getElementById("navigation4");
+        dragElement(navigation1);
+        dragElement(navigation2);
+        dragElement(navigation3);
+        dragElement(navigation4);
+        navigation1.classList.toggle('minimized');
+        navigation2.classList.toggle('minimized');
+        navigation3.classList.toggle('minimized');
+        navigation4.classList.toggle('minimized');
+        setTimeout(() => toggleMinimized("navigation1"), 500);
+        setTimeout(() => toggleMinimized("navigation2"), 500);
+        setTimeout(() => toggleMinimized("navigation3"), 500);
+        setTimeout(() => toggleMinimized("navigation4"), 500);
+    },[]);
+
     return (
         <nav>
             {/*Drawing*/}
-            <NavigationWrapper id={"navigation1"}>
+            <NavigationWrapper id={"navigation1"} classList={'minimized'}>
                 <Minimizer onClick={() => toggleMinimized("navigation1")}>
                     {minimized[0] ?
-                        <FontAwesomeIcon icon={faDraftingCompass} />:
-                        <FontAwesomeIcon icon={faCompress} />}
+                        <FontAwesomeIcon icon={faCompress} />:
+                        <FontAwesomeIcon icon={faDraftingCompass} />}
                 </Minimizer>
                 <Dragger id="navigation1Dragger"/>
                 <DrawingOptions/>
             </NavigationWrapper>
             {/*AppSettings*/}
-            <NavigationWrapper id={"navigation2"}>
+            <NavigationWrapper id={"navigation2"} classList={'minimized'}>
                 <Minimizer onClick={() => toggleMinimized("navigation2")}>
                     {minimized[1] ?
-                        <FontAwesomeIcon icon={faCog} />:
-                        <FontAwesomeIcon icon={faCompress} />}
+                        <FontAwesomeIcon icon={faCompress} />:
+                        <FontAwesomeIcon icon={faCog} />}
                 </Minimizer>
                 <Dragger id="navigation2Dragger"/>
                 <AppSettings resetMinimized={setMinimized}/>
             </NavigationWrapper>
             {/*PageSettings*/}
-            <NavigationWrapper id={"navigation3"}>
+            <NavigationWrapper id={"navigation3"} classList={'minimized'}>
                 <Minimizer onClick={() => toggleMinimized("navigation3")}>
                     {minimized[2] ?
-                        <FontAwesomeIcon icon={faFileImage} />:
-                        <FontAwesomeIcon icon={faCompress} />}
+                        <FontAwesomeIcon icon={faCompress} />:
+                        <FontAwesomeIcon icon={faFileImage} />}
                 </Minimizer>
                 <Dragger id="navigation3Dragger"/>
-                <PageSettings resetMinimized={setMinimized}/>
+                <PageSettings/>
             </NavigationWrapper>
             {/*Styles*/}
-            <NavigationWrapper id={"navigation4"}>
+            <NavigationWrapper id={"navigation4"} classList={'minimized'}>
                 <Minimizer onClick={() => toggleMinimized("navigation4")}>
                     {minimized[3] ?
-                        <FontAwesomeIcon icon={faPalette} />:
-                        <FontAwesomeIcon icon={faCompress} />}
+                        <FontAwesomeIcon icon={faCompress} />:
+                        <FontAwesomeIcon icon={faPalette} />}
                 </Minimizer>
                 <Dragger id="navigation4Dragger"/>
                 <StyleSettings/>

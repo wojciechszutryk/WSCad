@@ -7,9 +7,7 @@ import {
     VerticalBorderIndicatorElement
 } from "./WrokspaceStyles";
 
-const BorderIndicator = ({sheetWidth, sheetHeight, offset}) => {
-    const offsetX = offset+30;
-    const offsetY = 10;
+const BorderIndicator = ({sheetWidth, sheetHeight, offsetX, offsetY}) => {
     const cursorPosition = useMousePosition(offsetX,offsetY);
     const smallerArrayNumbers = [], largerArrayNumbers = [];
     let verticalBorderIndicators = [], horizontalBorderIndicators = [];
@@ -79,7 +77,8 @@ const BorderIndicator = ({sheetWidth, sheetHeight, offset}) => {
 };
 
 const ConnectedBorderIndicator = connect(state => ({
-        offset: state.application.sheetOffset,
+        offsetX: state.application.sheetOffsetX,
+        offsetY: state.application.sheetOffsetY,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
     })

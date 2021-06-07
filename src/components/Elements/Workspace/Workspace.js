@@ -30,7 +30,7 @@ import ImageInput from "../../drawElements/image/ImageInput";
 import BorderIndicator from "./BorderIndicator";
 
 const Workspace = ({drawing, drawings, indicator,
-                       offset, sheetWidth, sheetHeight,
+                       offsetX, offsetY, sheetWidth, sheetHeight,
                        deleteImage, deleteLine, deleteCircle, deleteText, deleteRect, deleteCurve}) => {
     const lines = []
     const polyLines = []
@@ -169,7 +169,7 @@ const Workspace = ({drawing, drawings, indicator,
 
     return (
         <>
-        <WorkspaceWrapper offset={offset+30} sheetWidth={sheetWidth} sheetHeight={sheetHeight}>
+        <WorkspaceWrapper offsetX={offsetX} offsetY={offsetY} sheetWidth={sheetWidth} sheetHeight={sheetHeight}  id='sheet'>
             <TransformWrapper pan={(drawing === 'curve' || drawing === 'pencil') ? {disabled: true} : {disabled: false}}>
                 <TransformComponent>
                     <Sheet sheetWidth={sheetWidth} sheetHeight={sheetHeight} drawing={drawing}>
@@ -193,7 +193,7 @@ const Workspace = ({drawing, drawings, indicator,
                 </TransformComponent>
             </TransformWrapper>
         </WorkspaceWrapper>
-        {drawing === 'image' && <ImageInput offset={offset+30}/>}
+        {drawing === 'image' && <ImageInput offsetX={offsetX} offsetY={offsetY}/>}
         {indicator && <BorderIndicator/>}
         </>
     );
@@ -202,7 +202,8 @@ const Workspace = ({drawing, drawings, indicator,
 const ConnectedWorkspace = connect(state => ({
         drawing: state.application.drawing,
         drawings: state.elements,
-        offset: state.application.sheetOffset,
+        offsetX: state.application.sheetOffsetX,
+        offsetY: state.application.sheetOffsetY,
         sheetWidth: state.application.sheetWidth,
         sheetHeight: state.application.sheetHeight,
         indicator: state.application.indicator,

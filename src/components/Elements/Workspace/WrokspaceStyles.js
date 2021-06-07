@@ -17,9 +17,9 @@ export const WorkspaceWrapper = styled.div`
   position: absolute;
   width: ${props => Math.max(props.sheetWidth,props.sheetWidth)}px;
   background-color: ${({theme}) => theme.paper.normal};
-  top: 10px;
+  top: ${props => props.offsetY}px;
   bottom: 10px;
-  left: ${props => props.offset}px;
+  left: ${props => props.offsetX}px;
 `;
 
 export const BorderIndicatorElementsWrapper = styled.div`
@@ -32,7 +32,7 @@ export const BorderIndicatorElementsWrapper = styled.div`
   height: ${props => props.height}px;
   text-align: center;
   background-color: ${({theme}) => theme.paper.hover};
-  color: ${({theme}) => theme.font.dark} !important;
+  color: ${({theme}) => theme.font.dark};
   &:first-child{
     line-height: 12px;
     text-align: right;
@@ -53,14 +53,13 @@ export const BorderIndicatorElementsWrapper = styled.div`
     left: ${props => props.offsetX}px;
     z-index: 4;
   }
-  
 `;
 
 export const VerticalBorderIndicatorElement = styled.div`
   box-sizing: border-box;
   width: ${props => props.width}px;
   height: ${props => props.height}px;
-  border-top: 1px solid black;
+  border-top: 1px solid ${({theme}) => theme.font.dark};
   font-family: sans-serif;
   &:last-child, &:first-child{
     border: none;
@@ -69,13 +68,13 @@ export const VerticalBorderIndicatorElement = styled.div`
 
 export const HorizontalBorderIndicatorElement = styled(VerticalBorderIndicatorElement)`
   border-top: none;
-  border-right: 1px solid black;
+  border-right: 1px solid ${({theme}) => theme.font.dark};
   &:nth-child(21), &:nth-child(29){
     z-index: 9;
     border: none;
   }
   &:first-child{
-    border-right: 1px solid black;
+    border-right: 1px solid ${({theme}) => theme.font.dark};
   }
 `;
 

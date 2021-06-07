@@ -21,11 +21,11 @@ export const darkTheme = {
     },
     font: {
         normal: 'rgb(222,168,255)',
-        dark: 'rgb(68,30,95)',
+        dark: 'rgb(214,207,255)',
     },
     paper: {
         normal: 'rgb(255,255,255)',
-        hover: 'rgb(165,150,255)'
+        hover: 'rgb(83,77,119)'
     }
 };
 
@@ -52,10 +52,10 @@ export const lightTheme = {
     },
     font: {
         normal: 'rgb(74,67,67)',
-        dark: 'rgb(103,35,22)',
+        dark: 'rgb(255,255,255)',
     },
     paper: {
         normal: 'rgb(255,255,255)',
-        hover: 'rgb(255,171,156)',
+        hover: 'rgb(136,136,136)',
     }
 }

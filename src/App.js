@@ -14,8 +14,8 @@ const App = () => {
           <DarkThemeProvider>
               <Wrapper>
                   <Logo/>
-                  <Workspace/>
                   <Navigation/>
+                  <Workspace/>
               </Wrapper>
           </DarkThemeProvider>
         </Provider>
