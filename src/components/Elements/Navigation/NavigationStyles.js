@@ -183,3 +183,14 @@ export const UploadFileInfo = styled.div`
   font-size: 60px;
   color: ${({theme}) => theme.color.normal};
 `;
+
+export const Information = styled.span`
+  position: absolute;
+  top: 60px;
+  left: -130px;
+  width: 200px;
+  font-size: 16px;
+  color: ${({theme}) => theme.font.dark};
+  font-family: roboto, sans-serif;
+  text-align: center;
+`;
