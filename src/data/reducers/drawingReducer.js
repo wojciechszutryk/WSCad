@@ -4,7 +4,7 @@ import {
     CURVE_ADD,
     CURVE_DELETE, IMAGE_ADD, IMAGE_DELETE,
     LINE_ADD,
-    LINE_DELETE,
+    LINE_DELETE, LOAD_DATA,
     RECT_ADD,
     RECT_DELETE, TEXT_ADD, TEXT_DELETE
 } from "../constants";
@@ -98,6 +98,8 @@ const elements = (state= startElements, action) => {
                 ...state,
                 images: state.images.filter(image => image.id !== action.payload),
             }
+        case LOAD_DATA:
+            return action.payload
         default:
             return state;
     }

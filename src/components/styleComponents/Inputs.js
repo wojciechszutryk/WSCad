@@ -29,3 +29,12 @@ export const NumberInput = styled(ParentInput)`
     outline: none;
   }
 `;
+
+export const FileInput = styled(ParentInput)`
+  position: absolute;
+  top: 40px;
+  left: -35px;
+  height: 120px;
+  width: 111px;
+  background-color: ${({theme}) => theme.background.dark};
+`;

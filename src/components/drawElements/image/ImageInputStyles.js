@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const ImageInputStyled = styled.div`
     position: relative;
     padding: 15px 0 0;
-    margin-top: ${props => props.offset/2}px;
+    margin-top: ${props => props.offset}px;
     margin-left: 10px;
     margin-right: 10px;
-    width: ${props => props.offset-20}px;
+    width: ${props => props.offset*2.5-20}px;
     font-family: sans-serif;
+    z-index: 20;
 
   & .form__field {
     width: 100%;

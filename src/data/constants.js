@@ -10,6 +10,7 @@ export const RECT_DELETE = "RECT_DELETE";
 export const CURVE_DELETE = "CURVE_DELETE";
 export const TEXT_DELETE = "TEXT_DELETE";
 export const IMAGE_DELETE = "IMAGE_DELETE";
+export const LOAD_DATA = "LOAD_DATA";
 
 export const THEME_TOGGLE = "THEME_TOGGLE";
 export const SET_SHEET_WIDTH = "SET_SHEET_WIDTH";

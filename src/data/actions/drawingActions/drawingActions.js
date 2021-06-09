@@ -1,7 +1,7 @@
 import {
     CIRCLE_ADD,
     CIRCLE_DELETE, CURVE_ADD, CURVE_DELETE, IMAGE_ADD, IMAGE_DELETE,
-    LINE_ADD, LINE_DELETE, RECT_ADD, RECT_DELETE, TEXT_ADD, TEXT_DELETE,
+    LINE_ADD, LINE_DELETE, LOAD_DATA, RECT_ADD, RECT_DELETE, TEXT_ADD, TEXT_DELETE,
 } from '../../constants';
 
 export const addLine = line => {
@@ -85,5 +85,12 @@ export const deleteImage = id => {
     return{
         type: IMAGE_DELETE,
         payload: id
+    }
+};
+
+export const loadData = data => {
+    return{
+        type: LOAD_DATA,
+        payload: data
     }
 };

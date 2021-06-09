@@ -1,9 +1,9 @@
 import React from 'react';
 import {ImageInputStyled} from "./ImageInputStyles";
 
-const ImageInput = ({offset}) => {
+const ImageInput = ({offsetX}) => {
     return (
-        <ImageInputStyled offset={offset} className="form__group field">
+        <ImageInputStyled offset={offsetX*0.4} className="form__group field">
             <input type="input" className="form__field" placeholder="Img URL"/>
             <label htmlFor="name" className="form__label">Img URL</label>
         </ImageInputStyled>

@@ -175,3 +175,11 @@ export const StyleInfo = styled.div`
     }
   }
 `;
+
+export const UploadFileInfo = styled.div`
+  position: absolute;
+  top: 80px;
+  left: 0;
+  font-size: 60px;
+  color: ${({theme}) => theme.color.normal};
+`;

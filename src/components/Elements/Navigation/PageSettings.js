@@ -1,5 +1,5 @@
-import React from 'react';
-import {ButtonsWrapper} from "./NavigationStyles";
+import React, {useState} from 'react';
+import {ButtonsWrapper, UploadFileInfo} from "./NavigationStyles";
 import {NormalButton} from "../../styleComponents/ButtonStyles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRulerCombined, faSync, faPrint, faDownload, faUpload} from "@fortawesome/free-solid-svg-icons";
@@ -17,13 +17,17 @@ import {
     addImage,
     addLine,
     addRect,
-    addText
+    addText, loadData
 } from "../../../data/actions/drawingActions/drawingActions";
+import {FileInput} from "../../styleComponents/Inputs";
+import {faFileCode} from "@fortawesome/free-regular-svg-icons";
 
 const PageSettings = ({setIndicator, indicator,
                     toggleOrientation, sheetVertical, setSheetWidth, setSheetHeight, offsetX, offsetY, setSheetOffsetY, setSheetOffsetX, sheetWidth, sheetHeight,
-                    addCircle, addRect, addLine, addCurve, addText, addImage, drawings,
+                    drawings, loadData
                     }) => {
+
+    const [upload, setUpload] = useState(false);
 
     const handleToggleSheet = () => {
         if (sheetVertical) {
@@ -68,9 +72,16 @@ const PageSettings = ({setIndicator, indicator,
         save(JSON.stringify(drawings), 'WSCad_'+date.toLocaleDateString()+'.json');
     }
 
-    const handleLoadFile = () => {
-        const date = new Date();
-        save(JSON.stringify(drawings), 'WSCad_'+date.toLocaleDateString()+'.json');
+    const handleUploadFile = (event) => {
+        const file = event.target.files[0];
+        let reader = new FileReader();
+        reader.addEventListener('load', function(e) {
+            let text = e.target.result;
+            const json = JSON.parse(text);
+            loadData(json);
+        });
+        reader.readAsText(file);
+        setUpload(false)
     }
 
     return (
@@ -84,12 +95,17 @@ const PageSettings = ({setIndicator, indicator,
             <NormalButton>
                 <FontAwesomeIcon icon={faDownload} onClick={handleSaveFile} className={'innerIcon'}/>
             </NormalButton>
-            <NormalButton>
-                <FontAwesomeIcon icon={faUpload} onClick={handleToggleSheet} className={'innerIcon'}/>
-            </NormalButton>
+            <div style={{position: 'relative'}}>
+                <NormalButton>
+                    <FontAwesomeIcon icon={faUpload} onClick={() => {setUpload(!upload)}} className={'innerIcon'}/>
+                </NormalButton>
+                {upload && <FileInput onChange={handleUploadFile} type="file" accept=".json"/>}
+                {upload && <UploadFileInfo><FontAwesomeIcon icon={faFileCode} onClick={() => setIndicator(!indicator)} className={'innerIcon'}/></UploadFileInfo>}
+            </div>
             <NormalButton>
                 <FontAwesomeIcon icon={faPrint} onClick={handlePrintSheet} className={'innerIcon'}/>
             </NormalButton>
+
         </ButtonsWrapper>
     );
 };
@@ -116,6 +132,7 @@ const ConnectedPageSettings = connect(state => ({
         addCurve,
         addText,
         addImage,
+        loadData
     }
 )(PageSettings);
 
